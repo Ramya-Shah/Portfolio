@@ -85,7 +85,7 @@ export const ProjectList: ProjectType[] = [
         description:
             "VoicerAI is an AI-powered podcast platform built with Next.js, ShadCN, and Tailwind CSS, offering seamless content creation and management. It integrates Convex for data storage and Clerk for authentication, ensuring a seamless and secure user experience.",
         imgUrl:
-            "./voicerai.png",
+            "/voicerai.png",
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah/VoicerAI",
         websiteUrl: "https://voicerai.vercel.app/",

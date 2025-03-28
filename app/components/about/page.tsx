@@ -90,12 +90,12 @@ export default function About() {
       </Card>
 
       {/* vertical img */}
-      <div className="hidden lg:block lg:row-start-1 lg:row-span-2 lg:col-start-3  lg:h-[350px] rounded-xl relative opacity-0 mobile-animation verticalImage">
+      <div className="hidden lg:block lg:row-start-1 lg:row-span-2 lg:col-start-3  lg:h-[400px] rounded-xl relative opacity-0 mobile-animation verticalImage">
         <Image
-          src="/about.webp"
+          src="/about.png"
           priority={true}
           alt="profile image"
-          fill
+            fill={true}
           style={{
             width: "100%",
             height: "100%",
