@@ -5,6 +5,7 @@ import Providers from "./providers";
 import { NavbarSection } from "./components/ui/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 import "./globals.css";
+import FlareCursor from "./components/cursor";
 
 export const metadata: Metadata = {
   title: "Ramya Shah",
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <FlareCursor></FlareCursor>
         <main className="dark text-foreground bg-background min-h-screen">
           <NavbarSection />
           <Providers>{children}</Providers>
