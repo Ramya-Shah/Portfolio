@@ -6,6 +6,7 @@ import { NavbarSection } from "./components/ui/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 import "./globals.css";
 import FlareCursor from "./components/cursor";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: "Ramya Shah",
@@ -24,6 +25,7 @@ export default function RootLayout({
         <main className="dark text-foreground bg-background min-h-screen">
           <NavbarSection />
           <Providers>{children}</Providers>
+          <GoogleAnalytics gaId="G-VCZZFHEGN3" />
           <Analytics />
         </main>
       </body>
