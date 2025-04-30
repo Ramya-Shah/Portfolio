@@ -157,5 +157,72 @@ export const ProjectList: ProjectType[] = [
         githubUrl: "https://github.com/Ramya-Shah/PARKit",
         websiteUrl: "https://parkit-olive.vercel.app/",
     },
-
+    {
+        icon: <ShadcnLandingSVG />,
+        title: "Decentralised Identity verification",
+        subtitle: "Web3 identity management system",
+        technologies: [
+            {
+                name: "React",
+                icon: (
+                    <ReactSVG
+                        color="#61DAFB"
+                        size={16}
+                    />
+                ),
+            },
+            {
+                name: "Solidity",
+                icon: (
+                    <TailwindSVG
+                        color="#06B6D4"
+                        size={16}
+                    />
+                ),
+            },
+            {
+                name: "Ethereum",
+                icon: (
+                    <TailwindSVG
+                        color="#06B6D4"
+                        size={16}
+                    />
+                ),
+            },
+            {
+                name: "Web3.js",
+                icon: (
+                    <TailwindSVG
+                        color="#06B6D4"
+                        size={16}
+                    />
+                ),
+            },
+            {
+                name: "Tailwind",
+                icon: (
+                    <TailwindSVG
+                        color="#06B6D4"
+                        size={16}
+                    />
+                ),
+            },
+            {
+                name: "Shadcn",
+                icon: (
+                    <TailwindSVG
+                        color="#06B6D4"
+                        size={16}
+                    />
+                ),
+            },
+            
+        ],
+        description:
+            "A blockchain-based identity system on Ethereum (Sepolia testnet) that lets users create and manage digital identities securely. It ensures privacy, enables verification without revealing sensitive data, and tracks who accessed the information.",
+        imgUrl: "/did.png",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/decentralised-identity",
+        websiteUrl: "https://decentralised-identity-two.vercel.app/",
+    },
 ];

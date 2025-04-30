@@ -35,9 +35,13 @@ export const Project = (project: ProjectType) => {
 
     return (
         <div className="grid grid-rows-8 grid-cols-4 gap-5 pb-4 overflow-hidden">
-            <div className="flex lg:hidden items-center col-span-full lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-5 text-3xl font-bold text-white opacity-0 mobile-animation titleSection">
-                <span className="bg-[#303036] p-2 rounded-md mr-2"> {icon}</span>
-                {title}
+            <div className="flex lg:hidden items-center col-span-full lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-5 text-xl font-bold text-white opacity-0 mobile-animation titleSection">
+                <div className="bg-[#303036] p-2 rounded-md mr-2 flex-shrink-0">
+                    {icon}
+                </div>
+                <div className="flex-grow">
+                    {title}
+                </div>
             </div>
 
             <div className="col-span-full lg:row-start-1 lg:row-end-4 lg:col-start-1 lg:col-end-3 opacity-0 mobile-animation videoSection flex justify-center items-center">
@@ -45,7 +49,7 @@ export const Project = (project: ProjectType) => {
                     // Video rendering logic
                     <video
                         className="rounded-xl border-1 border-[#212121] max-w-full max-h-[400px]"
-                        style={{ 
+                        style={{
                             objectFit: "contain"
                         }}
                         autoPlay
@@ -65,7 +69,7 @@ export const Project = (project: ProjectType) => {
                             sizes="100vw"
                             priority={true}
                             className="rounded-xl border-1 border-[#212121] max-h-[400px] w-auto h-auto"
-                            style={{ 
+                            style={{
                                 objectFit: "contain",
                                 maxWidth: "100%"
                             }}
@@ -76,9 +80,13 @@ export const Project = (project: ProjectType) => {
 
             <Card className="col-span-full lg:row-start-1 lg:row-end-3 lg:col-start-3 lg:col-end-5 lg:min-h-[250px] opacity-0 mobile-animation descriptionCard">
                 <CardBody className="text-gray-400 text-lg flex justify-between gap-4">
-                    <div className="hidden lg:flex col-span-full lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-5 text-3xl font-bold text-white opacity-0 mobile-animation titleSection">
-                        <span className="bg-[#303036] p-2 rounded-md mr-2"> {icon}</span>{" "}
-                        {title}
+                    <div className="hidden lg:flex items-center col-span-full lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-5 text-3xl font-bold text-white opacity-0 mobile-animation titleSection">
+                        <div className="bg-[#303036] p-2 rounded-md mr-2 flex-shrink-0">
+                            {icon}
+                        </div>
+                        <div className="flex-grow">
+                            {title}
+                        </div>
                     </div>
                     {description}
                     <div className=" flex flex-wrap gap-2">
@@ -125,8 +133,8 @@ export const Project = (project: ProjectType) => {
             <Card
                 isHoverable
                 className={`${websiteUrl === "NONE"
-                        ? "lg:col-start-3 col-span-4"
-                        : "lg:col-start-4 col-span-2"
+                    ? "lg:col-start-3 col-span-4"
+                    : "lg:col-start-4 col-span-2"
                     }  lg:row-start-3 lg:row-end-4 lg:max-h-24 lg:col-end-5 opacity-0 mobile-animation websiteUrlCard`}
             >
                 <Link
