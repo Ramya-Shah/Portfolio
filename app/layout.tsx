@@ -25,7 +25,6 @@ export default function RootLayout({
         <main className="dark text-foreground bg-background min-h-screen">
           <NavbarSection />
           <Providers>{children}</Providers>
-          <GoogleAnalytics gaId="G-VCZZFHEGN3" />
           <Analytics />
         </main>
       </body>
