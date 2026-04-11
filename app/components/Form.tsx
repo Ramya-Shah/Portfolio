@@ -12,24 +12,17 @@ export const Form = () => {
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
-  const [isInvalidName, setIsInvalidName] = useState<boolean>(false);
-  const [isInvalidEmail, setIsInvalidEmail] = useState<boolean>(false);
-  const [isInvalidMessage, setIsInvalidMessage] = useState<boolean>(false);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    if (name !== "") setIsInvalidName(false);
-    if (
-      email.match(
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-      )
-    )
-      setIsInvalidEmail(false);
-    if (message !== "") setIsInvalidMessage(false);
-  }, [name, email, message]);
+  const isValidEmail = (email: string) => {
+    return email === "" || /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+  };
+
+  const isInvalidName = name === "" && isSubmitting;
+  const isInvalidEmail = (!isValidEmail(email) || (email === "" && isSubmitting));
+  const isInvalidMessage = message === "" && isSubmitting;
 
   useEffect(() => {
     if (error) {
@@ -57,11 +50,7 @@ export const Form = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (name === "") setIsInvalidName(true);
-    if (email === "") setIsInvalidEmail(true);
-    if (message === "") setIsInvalidMessage(true);
-
-    if (!name || !email || !message) {
+    if (!name || isInvalidEmail || !message) {
       return;
     }
 
@@ -135,11 +124,9 @@ export const Form = () => {
         onChange={(e) => setMessage(e.target.value)}
         errorMessage={isInvalidMessage && "Please enter your message"}
       />
-      <Button type="submit" disabled={isSubmitting}>
+      <Button type="submit" isLoading={isSubmitting} className="bg-white text-black font-medium">
         {isSubmitting ? "Sending..." : "Send Message"}
       </Button>
-
-      <Toaster theme="dark" />
     </form>
   );
 };

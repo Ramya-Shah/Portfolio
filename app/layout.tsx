@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   description: "Ramya Shah | Fullstack developer portfolio",
 };
 
+import { Toaster } from 'sonner';
+
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +26,10 @@ export default function RootLayout({
         <FlareCursor></FlareCursor>
         <main className="dark text-foreground bg-background min-h-screen">
           <NavbarSection />
-          <Providers>{children}</Providers>
+          <Providers>
+            {children}
+            <Toaster theme="dark" />
+          </Providers>
           <Analytics />
         </main>
       </body>

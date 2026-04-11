@@ -60,19 +60,14 @@ export const Project = (project: ProjectType) => {
                     />
                 ) : (
                     // Image with dynamic sizing
-                    <div className="w-full flex justify-center items-center">
+                    <div className="relative w-full h-[300px] lg:h-[400px] flex justify-center items-center">
                         <Image
                             src={imgUrl}
                             alt={title}
-                            width={0}
-                            height={0}
-                            sizes="100vw"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             priority={true}
-                            className="rounded-xl border-1 border-[#212121] max-h-[400px] w-auto h-auto"
-                            style={{
-                                objectFit: "contain",
-                                maxWidth: "100%"
-                            }}
+                            className="rounded-xl border-1 border-[#212121] object-contain"
                         />
                     </div>
                 )}

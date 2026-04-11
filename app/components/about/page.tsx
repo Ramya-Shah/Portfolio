@@ -95,13 +95,8 @@ export default function About() {
           src="/about.png"
           priority={true}
           alt="profile image"
-            fill={true}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            borderRadius: "15px",
-          }}
+          fill
+          className="object-cover rounded-[15px]"
         />
       </div>
 
