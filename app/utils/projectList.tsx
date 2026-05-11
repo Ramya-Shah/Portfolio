@@ -71,7 +71,7 @@ export const ProjectList: ProjectType[] = [
         imgUrl: "/taskforge.png",
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah/TaskForge",
-        websiteUrl: "http://34.66.168.60/",
+        websiteUrl: "http://34.27.155.77/",
     },
     {
         icon: <ShadcnLandingSVG />,
@@ -317,7 +317,7 @@ export const ProjectList: ProjectType[] = [
                     />
                 ),
             },
-            
+
         ],
         description:
             "A blockchain-based identity system on Ethereum (Sepolia testnet) that lets users create and manage digital identities securely. It ensures privacy, enables verification without revealing sensitive data, and tracks who accessed the information.",
