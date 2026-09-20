@@ -3,142 +3,123 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const FlareCursor: React.FC = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const flareRef = useRef<HTMLDivElement>(null);
-  const trailContainerRef = useRef<HTMLDivElement>(null);
-  const [isPointer, setIsPointer] = useState<boolean>(false);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  
+  const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isClicking, setIsClicking] = useState<boolean>(false);
-  const requestRef = useRef<number>();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isTouch, setIsTouch] = useState<boolean>(false);
   
-  // Real mouse position
   const mousePos = useRef({ x: -100, y: -100 });
-  
-  // Animated positions for physics
-  const flarePos = useRef({ x: -100, y: -100 });
-  const trailPos = useRef<{x: number, y: number}[]>(
-    Array(8).fill(null).map(() => ({ x: -100, y: -100 }))
-  );
-  
-  const isClickingRef = useRef(false);
-  
-  // Keep syncing state to ref for the animation loop
-  useEffect(() => {
-    isClickingRef.current = isClicking;
-  }, [isClicking]);
+  const ringPos = useRef({ x: -100, y: -100 });
+  const animFrameId = useRef<number>();
 
   useEffect(() => {
-    document.body.style.cursor = 'none';
+    // Disable on touch devices (phones / tablets)
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      setIsTouch(true);
+      return;
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
-      // Snap instantly on the very first mouse move to avoid a flying comet cursor
+      if (!isVisible) setIsVisible(true);
+
+      // Snap position instantly on first mouse move to prevent initial jump
       if (mousePos.current.x === -100) {
-        flarePos.current = { x: e.clientX, y: e.clientY };
-        trailPos.current.forEach(p => { p.x = e.clientX; p.y = e.clientY; });
+        ringPos.current = { x: e.clientX, y: e.clientY };
       }
+
       mousePos.current = { x: e.clientX, y: e.clientY };
 
-      const target = e.target as HTMLElement;
-      const isPointerElement = 
-        target.tagName.toLowerCase() === 'button' ||
-        target.tagName.toLowerCase() === 'a' ||
-        target.tagName.toLowerCase() === 'input' ||
-        target.onclick !== null ||
-        window.getComputedStyle(target).cursor === 'pointer';
-      
-      setIsPointer(isPointerElement);
+      // Detect clickable / interactive elements
+      const target = e.target as HTMLElement | null;
+      if (target) {
+        const isInteractive = Boolean(
+          target.closest('a') ||
+          target.closest('button') ||
+          target.closest('input') ||
+          target.closest('textarea') ||
+          target.closest('[role="button"]') ||
+          target.closest('.bento-poppy') ||
+          target.closest('.bento-btn-poppy') ||
+          window.getComputedStyle(target).cursor === 'pointer'
+        );
+        setIsHovered(isInteractive);
+      }
     };
 
-    const handleMouseDown = (): void => setIsClicking(true);
-    const handleMouseUp = (): void => setIsClicking(false);
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+    const handleMouseLeave = () => setIsVisible(false);
+    const handleMouseEnter = () => setIsVisible(true);
 
-    const cleanup = (): void => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
-      document.body.style.cursor = 'auto';
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mouseleave', handleMouseLeave);
+    document.addEventListener('mouseenter', handleMouseEnter);
+
+    // Smooth Lerp Physics Animation Loop
+    const renderLoop = () => {
+      const targetX = mousePos.current.x;
+      const targetY = mousePos.current.y;
+
+      // 1. Instant Precision Dot
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${targetX}px, ${targetY}px, 0) translate(-50%, -50%)`;
+      }
+
+      // 2. Fluid Magnetic Follower Ring (Lerp factor 0.18 for buttery smooth chase)
+      ringPos.current.x += (targetX - ringPos.current.x) * 0.18;
+      ringPos.current.y += (targetY - ringPos.current.y) * 0.18;
+
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`;
+      }
+
+      animFrameId.current = requestAnimationFrame(renderLoop);
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
+    animFrameId.current = requestAnimationFrame(renderLoop);
 
-    // Animation Loop with Lerp Physics
-    const updateCursor = () => {
-      const { x, y } = mousePos.current;
-      const click = isClickingRef.current;
-
-      // 1. Update Core Dot (Instant)
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(calc(${x}px - 50%), calc(${y}px - 50%), 0) scale(${click ? 1.5 : 1})`;
-      }
-
-      // 2. Lerp Main Flare (Adds weight and drag)
-      flarePos.current.x += (x - flarePos.current.x) * 0.2;
-      flarePos.current.y += (y - flarePos.current.y) * 0.2;
-      
-      if (flareRef.current) {
-        flareRef.current.style.transform = `translate3d(calc(${flarePos.current.x}px - 50%), calc(${flarePos.current.y}px - 50%), 0) scale(${click ? 0.7 : 1})`;
-      }
-
-      // 3. Lerp Trail (Each dot follows the one ahead of it elastically)
-      let prevPos = mousePos.current;
-      const trail = trailPos.current;
-
-      if (trailContainerRef.current) {
-        const trailDots = trailContainerRef.current.children;
-        for (let i = 0; i < trail.length; i++) {
-          trail[i].x += (prevPos.x - trail[i].x) * 0.35;
-          trail[i].y += (prevPos.y - trail[i].y) * 0.35;
-          prevPos = trail[i];
-
-          const dot = trailDots[i] as HTMLElement;
-          dot.style.transform = `translate3d(calc(${trail[i].x}px - 50%), calc(${trail[i].y}px - 50%), 0)`;
-        }
-      }
-
-      requestRef.current = requestAnimationFrame(updateCursor);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+      document.removeEventListener('mouseenter', handleMouseEnter);
+      if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
     };
-    
-    requestRef.current = requestAnimationFrame(updateCursor);
+  }, [isVisible]);
 
-    return cleanup;
-  }, []);
+  if (isTouch) return null;
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[9999] hidden md:block">
-      {/* Elastic Comet Trail */}
-      <div ref={trailContainerRef}>
-        {[...Array(8)].map((_, i) => {
-          const size = Math.max(12 - i * 1.5, 2);
-          return (
-            <div 
-              key={i}
-              className="absolute top-0 left-0 rounded-full bg-white will-change-transform"
-              style={{
-                width: `${size}px`,
-                height: `${size}px`,
-                opacity: 0.3 - (i * 0.025), // Smooth fade backwards
-              }}
-            />
-          );
-        })}
-      </div>
-      
-      {/* Main cursor flare */}
+    <div
+      className={`fixed inset-0 pointer-events-none z-[99999] transition-opacity duration-300 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
+      aria-hidden="true"
+    >
+      {/* Fluid Outer Ring Follower */}
       <div
-        ref={flareRef}
-        className={`absolute top-0 left-0 rounded-full bg-white transition-[width,height,opacity,background-color] duration-200 ease-out will-change-transform ${
-          isPointer ? 'w-10 h-10 bg-opacity-20 backdrop-blur-sm' : 'w-[30px] h-[30px] bg-opacity-70'
-        }`}
+        ref={ringRef}
+        className={`fixed top-0 left-0 rounded-full will-change-transform transition-[width,height,background-color,border-color,transform] duration-200 ease-out flex items-center justify-center ${
+          isHovered
+            ? 'w-14 h-14 bg-[#CC3A63]/12 border-[1.5px] border-[#CC3A63]/70 backdrop-blur-[2px]'
+            : 'w-9 h-9 bg-[#141416]/5 border-[1.5px] border-[#141416]/30 backdrop-blur-[1px]'
+        } ${isClicking ? 'scale-75' : 'scale-100'}`}
       />
-      
-      {/* Cursor dot */}
+
+      {/* Instant Precision Center Dot */}
       <div
-        ref={cursorRef}
-        className={`absolute top-0 left-0 rounded-full bg-white transition-[width,height] duration-200 ease-out will-change-transform ${
-          isPointer ? 'w-2 h-2' : 'w-[6px] h-[6px]'
-        }`}
+        ref={dotRef}
+        className={`fixed top-0 left-0 rounded-full will-change-transform transition-[width,height,background-color,transform] duration-150 ease-out ${
+          isHovered
+            ? 'w-2 h-2 bg-[#CC3A63]'
+            : 'w-1.5 h-1.5 bg-[#141416]'
+        } ${isClicking ? 'scale-50' : 'scale-100'}`}
       />
     </div>
   );

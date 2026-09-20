@@ -1,148 +1,125 @@
 "use client";
-import { useEffect } from "react";
-import Link from "next/link";
 
-import { Card, CardBody } from "@nextui-org/card";
-import { Chip } from "@nextui-org/chip";
-
+import Image from "next/image";
 import { TechnologyType, ProjectType } from "../types";
 import { GithubSVG, LinkSVG } from "./ui/icons";
-import ProjectsSectionAnimations from "../utils/ProjectsSectionAnimations";
-import Image from "next/image";
 
 export const Project = (project: ProjectType) => {
-    const {
-        description,
-        title,
-        icon,
-        imgUrl,
-        videoUrl,
-        technologies,
-        githubUrl,
-        websiteUrl,
-    } = project;
+  const {
+    description,
+    title,
+    subtitle,
+    icon,
+    imgUrl,
+    videoUrl,
+    technologies,
+    githubUrl,
+    websiteUrl,
+    metricBadge,
+  } = project;
 
-    useEffect(() => {
-        const mq = window.matchMedia("(min-width: 1024px)");
-        if (!mq.matches) return ProjectsSectionAnimations.mobileAnimation();
+  const hasLiveUrl = websiteUrl && websiteUrl !== "" && websiteUrl !== "NONE";
 
-        ProjectsSectionAnimations.titleAnimation();
-        ProjectsSectionAnimations.videoAnimation();
-        ProjectsSectionAnimations.descriptionAnimation();
-        ProjectsSectionAnimations.websiteUrlAnimation();
-        ProjectsSectionAnimations.githubUrlAnimation();
-    }, []);
+  return (
+    <div className="rounded-3xl bg-[#F9F0E0] text-[#141416] overflow-hidden shadow-xl border border-[#FFF7EB]/60 bento-poppy flex flex-col justify-between group">
+      <div>
+        {/* Visual Media Header (16:9 Aspect Ratio) */}
+        <div className="relative w-full aspect-video bg-black/10 overflow-hidden border-b border-[#141416]/10">
+          {videoUrl ? (
+            <video
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              autoPlay
+              loop
+              muted
+              playsInline
+              src={videoUrl}
+            />
+          ) : (
+            <Image
+              src={imgUrl}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              priority={false}
+            />
+          )}
 
-    return (
-        <div className="grid grid-rows-8 grid-cols-4 gap-5 pb-4 overflow-hidden">
-            <div className="flex lg:hidden items-center col-span-full lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-5 text-xl font-bold text-white opacity-0 mobile-animation titleSection">
-                <div className="bg-[#303036] p-2 rounded-md mr-2 flex-shrink-0">
-                    {icon}
-                </div>
-                <div className="flex-grow">
-                    {title}
-                </div>
+          {/* Metric Pill Overlay */}
+          {metricBadge && (
+            <div className="absolute top-3 right-3 z-10">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-black bg-[#CC3A63] text-white shadow-lg tracking-wider">
+                {metricBadge}
+              </span>
             </div>
-
-            <div className="col-span-full lg:row-start-1 lg:row-end-4 lg:col-start-1 lg:col-end-3 opacity-0 mobile-animation videoSection flex justify-center items-center">
-                {videoUrl ? (
-                    // Video rendering logic
-                    <video
-                        className="rounded-xl border-1 border-[#212121] max-w-full max-h-[400px]"
-                        style={{
-                            objectFit: "contain"
-                        }}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        src={videoUrl}
-                    />
-                ) : (
-                    // Image with dynamic sizing
-                    <div className="relative w-full h-[300px] lg:h-[400px] flex justify-center items-center">
-                        <Image
-                            src={imgUrl}
-                            alt={title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            priority={true}
-                            className="rounded-xl border-1 border-[#212121] object-contain"
-                        />
-                    </div>
-                )}
-            </div>
-
-            <Card className="col-span-full lg:row-start-1 lg:row-end-3 lg:col-start-3 lg:col-end-5 lg:min-h-[250px] opacity-0 mobile-animation descriptionCard">
-                <CardBody className="text-gray-400 text-lg flex justify-between gap-4">
-                    <div className="hidden lg:flex items-center col-span-full lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-5 text-3xl font-bold text-white opacity-0 mobile-animation titleSection">
-                        <div className="bg-[#303036] p-2 rounded-md mr-2 flex-shrink-0">
-                            {icon}
-                        </div>
-                        <div className="flex-grow">
-                            {title}
-                        </div>
-                    </div>
-                    {description}
-                    <div className=" flex flex-wrap gap-2">
-                        {technologies.map(
-                            ({ name, icon }: TechnologyType, index: number) => (
-                                <Chip
-                                    key={`technology-item-${index}`}
-                                    size="sm"
-                                >
-                                    <span className="flex items-center gap-2">
-                                        {/* {icon} */}
-                                        {name}
-                                    </span>
-                                </Chip>
-                            )
-                        )}
-                    </div>
-                </CardBody>
-            </Card>
-
-            <Card
-                isHoverable
-                className={`${websiteUrl === "NONE" && "hidden"
-                    } col-span-2 lg:row-start-3 lg:row-end-4 lg:col-start-3 lg:max-h-24 lg:col-end-4 opacity-0 mobile-animation githubUrlCard`}
-            >
-                <Link
-                    href={websiteUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="min-h-full flex justify-center items-center"
-                >
-                    <CardBody className="justify-center items-center">
-                        {!websiteUrl ? (
-                            <h2 className="font-bold text-xl text-gray-400 text-center">
-                                Coming Soon!
-                            </h2>
-                        ) : (
-                            <LinkSVG />
-                        )}
-                    </CardBody>
-                </Link>
-            </Card>
-
-            <Card
-                isHoverable
-                className={`${websiteUrl === "NONE"
-                    ? "lg:col-start-3 col-span-4"
-                    : "lg:col-start-4 col-span-2"
-                    }  lg:row-start-3 lg:row-end-4 lg:max-h-24 lg:col-end-5 opacity-0 mobile-animation websiteUrlCard`}
-            >
-                <Link
-                    href={githubUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="min-h-full flex justify-center items-center"
-                >
-                    <CardBody className="justify-center items-center">
-                        <GithubSVG />
-                    </CardBody>
-                </Link>
-            </Card>
+          )}
         </div>
-    );
+
+        {/* Card Body */}
+        <div className="p-6 sm:p-7 flex flex-col gap-4">
+          {/* Title & Subtitle */}
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-[#141416]/5 border border-[#141416]/10 flex items-center justify-center text-[#141416] flex-shrink-0">
+              {icon}
+            </div>
+            <div className="flex flex-col">
+              <h3 className="text-xl font-black text-[#141416] tracking-tight group-hover:text-[#CC3A63] transition-colors">
+                {title}
+              </h3>
+              <span className="text-xs font-bold text-[#A2AB73] uppercase tracking-wider">
+                {subtitle}
+              </span>
+            </div>
+          </div>
+
+          {/* Architecture & Engineering Description */}
+          <p className="text-xs sm:text-sm font-medium text-[#141416]/75 leading-relaxed line-clamp-4">
+            {description}
+          </p>
+
+          {/* Technology Badges */}
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {technologies.map(({ name }: TechnologyType, idx: number) => (
+              <span
+                key={`tech-${idx}`}
+                className="px-2.5 py-1 rounded-lg bg-[#141416]/10 text-[#141416] text-xs font-bold"
+              >
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Action Footer */}
+      <div className="p-6 sm:p-7 pt-0 flex items-center gap-3">
+        {hasLiveUrl ? (
+          <a
+            href={websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 py-2.5 px-4 rounded-xl bg-[#141416] text-[#FFF7EB] font-black text-xs sm:text-sm text-center bento-btn-poppy hover:bg-[#CC3A63] transition-colors flex items-center justify-center gap-2 shadow-md"
+          >
+            <LinkSVG size={15} color="#FFF7EB" />
+            <span>Live Demo</span>
+          </a>
+        ) : (
+          <span className="flex-1 py-2.5 px-4 rounded-xl bg-[#141416]/5 text-[#141416]/40 text-center text-xs font-bold cursor-not-allowed border border-[#141416]/10 flex items-center justify-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#141416]/25"></span>
+            <span>Production System</span>
+          </span>
+        )}
+
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="py-2.5 px-4 rounded-xl border border-[#141416]/20 text-[#141416] font-bold text-xs sm:text-sm bento-btn-poppy hover:border-[#CC3A63] hover:text-[#CC3A63] flex items-center gap-2 bg-[#141416]/5"
+        >
+          <GithubSVG size={16} color="currentColor" />
+          <span>Source</span>
+        </a>
+      </div>
+    </div>
+  );
 };

@@ -15,20 +15,20 @@ export const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [touched, setTouched] = useState(false);
 
-  const isValidEmail = (email: string) => {
-    return email === "" || /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+  const isValidEmail = (val: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   };
 
-  const isInvalidName = name === "" && isSubmitting;
-  const isInvalidEmail = (!isValidEmail(email) || (email === "" && isSubmitting));
-  const isInvalidMessage = message === "" && isSubmitting;
+  const isInvalidName = touched && name.trim() === "";
+  const isInvalidEmail = touched && (!isValidEmail(email) || email.trim() === "");
+  const isInvalidMessage = touched && message.trim() === "";
 
   useEffect(() => {
     if (error) {
       toast.error("Email has not been sent", {
-        className: "my-classname",
-        duration: 3000,
+        duration: 3500,
         icon: <CircleXSVG />,
         description: error,
       });
@@ -38,10 +38,10 @@ export const Form = () => {
 
   useEffect(() => {
     if (submitted) {
-      toast.success("Email has been sent", {
-        className: "my-classname",
-        duration: 3000,
+      toast.success("Message sent successfully!", {
+        duration: 3500,
         icon: <CircleCheckSVG />,
+        description: "Thank you for reaching out. I will get back to you shortly.",
       });
       setSubmitted(false);
     }
@@ -49,8 +49,14 @@ export const Form = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setTouched(true);
 
-    if (!name || isInvalidEmail || !message) {
+    if (!name.trim() || !isValidEmail(email) || !message.trim()) {
+      toast.error("Incomplete Form", {
+        description: "Please fill in all required fields with a valid email.",
+        icon: <CircleXSVG />,
+        duration: 3500,
+      });
       return;
     }
 
@@ -72,6 +78,7 @@ export const Form = () => {
         setName("");
         setEmail("");
         setMessage("");
+        setTouched(false);
       } else {
         setError(data.message || "Failed to send email");
       }
@@ -88,45 +95,67 @@ export const Form = () => {
       className="flex flex-col gap-4"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <h2 className="text-3xl font-bold">Contact with me</h2>
-      <p className="text-lg text-gray-400">
-        You can also get in touch with me through this form below.
+      <h2 className="text-2xl sm:text-3xl font-black text-[#141416] tracking-tight">Send a Message</h2>
+      <p className="text-sm font-medium text-[#141416]/70">
+        You can also get in touch directly through this form below.
       </p>
       <Input
         id="name"
         type="text"
         label="Name"
-        placeholder="John Doe"
+        placeholder="Your full name"
         isInvalid={isInvalidName}
         value={name}
         onChange={(e) => setName(e.target.value)}
-        errorMessage={isInvalidName && "Please enter your name"}
+        errorMessage={isInvalidName ? "Please enter your name" : ""}
+        classNames={{
+          inputWrapper: `bg-white/90 border ${isInvalidName ? "border-[#CC3A63] ring-1 ring-[#CC3A63]" : "border-[#141416]/15 hover:border-[#CC3A63] focus-within:border-[#CC3A63]"} text-[#141416] shadow-xs transition-colors`,
+          label: "text-[#141416]/80 font-bold",
+          input: "text-[#141416] font-medium",
+          errorMessage: "text-[#CC3A63] text-xs font-bold mt-1",
+        }}
       />
       <Input
         type="email"
         name="email"
         id="email"
         label="Email"
-        placeholder="john.doe@example.com"
+        placeholder="you@example.com"
         isInvalid={isInvalidEmail}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        errorMessage={isInvalidEmail && "Please enter a valid email"}
+        errorMessage={isInvalidEmail ? (email.trim() === "" ? "Please enter your email" : "Please enter a valid email address") : ""}
+        classNames={{
+          inputWrapper: `bg-white/90 border ${isInvalidEmail ? "border-[#CC3A63] ring-1 ring-[#CC3A63]" : "border-[#141416]/15 hover:border-[#CC3A63] focus-within:border-[#CC3A63]"} text-[#141416] shadow-xs transition-colors`,
+          label: "text-[#141416]/80 font-bold",
+          input: "text-[#141416] font-medium",
+          errorMessage: "text-[#CC3A63] text-xs font-bold mt-1",
+        }}
       />
       <Textarea
         id="message"
         type="text"
         label="Message"
-        placeholder="Enter your message here"
+        placeholder="Write your note or project inquiry here..."
         minRows={4}
         isInvalid={isInvalidMessage}
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        errorMessage={isInvalidMessage && "Please enter your message"}
+        errorMessage={isInvalidMessage ? "Please enter a message" : ""}
+        classNames={{
+          inputWrapper: `bg-white/90 border ${isInvalidMessage ? "border-[#CC3A63] ring-1 ring-[#CC3A63]" : "border-[#141416]/15 hover:border-[#CC3A63] focus-within:border-[#CC3A63]"} text-[#141416] shadow-xs transition-colors`,
+          label: "text-[#141416]/80 font-bold",
+          input: "text-[#141416] font-medium",
+          errorMessage: "text-[#CC3A63] text-xs font-bold mt-1",
+        }}
       />
-      <Button type="submit" isLoading={isSubmitting} className="bg-white text-black font-medium">
-        {isSubmitting ? "Sending..." : "Send Message"}
-      </Button>
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full py-3.5 px-6 rounded-xl bg-[#141416] text-[#FFF7EB] font-black text-sm tracking-wide shadow-lg bento-btn-poppy hover:bg-[#CC3A63] transition-colors disabled:opacity-50"
+      >
+        {isSubmitting ? "Sending..." : "Send Message →"}
+      </button>
     </form>
   );
 };

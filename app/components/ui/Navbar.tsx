@@ -1,87 +1,55 @@
 "use client";
+
 import Link from "next/link";
-import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import { usePathname } from "next/navigation";
 
-interface routeProps {
+interface RouteProps {
   label: string;
   url: string;
 }
 
-const routes: routeProps[] = [
-  {
-    label: "Home",
-    url: "/",
-  },
-  {
-    label: "Projects",
-    url: "/projects",
-  },
-  {
-    label: "Contact",
-    url: "/contact",
-  },
+const routes: RouteProps[] = [
+  { label: "ABOUT", url: "/" },
+  { label: "PROJECTS", url: "/projects" },
+  { label: "CONTACT", url: "/contact" },
 ];
 
 export const NavbarSection = () => {
   const pathname = usePathname();
 
   return (
-    <Navbar
-      classNames={{
-        wrapper: [
-          "bg-content2",
-          "rounded-xl",
-          "h-11",
-          "my-8",
-          "flex",
-          "justify-center",
-          "w-auto",
-          "px-2",
-        ],
+    <header className="w-full max-w-6xl mx-auto px-4 pt-6 pb-2">
+      <div className="w-full rounded-2xl bg-[#F9F0E0] text-[#141416] px-6 py-4 flex items-center justify-between shadow-xl border border-[#FFF7EB]/40 bento-poppy">
+        {/* Brand Name on Left */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="font-extrabold text-base sm:text-lg tracking-wider uppercase text-[#141416] group-hover:text-[#CC3A63] transition-colors">
+            RAMYA SHAH
+          </span>
+          <span className="hidden sm:inline-block text-xs font-bold text-[#A2AB73] uppercase tracking-widest pl-1 border-l border-[#141416]/20">
+            ENGINEER
+          </span>
+        </Link>
 
-        item: [
-          "transition-all",
-          "flex",
-          "relative",
-          "text-sm",
-          "text-default-500",
-          "font-medium",
-          "items-center",
-          "hover:text-opacity-60",
-          "data-[active=true]:after:content-['']",
-          "data-[active=true]:after:absolute",
-          "data-[active=true]:after:bottom-0",
-          "data-[active=true]:after:left-0",
-          "data-[active=true]:after:right-0",
-          "data-[active=true]:after:h-[2px]",
-          "data-[active=true]:after:rounded-[2px]",
-          "data-[active=true]:bg-background",
-          "data-[active=true]:text-default-foreground",
-          "data-[active=true]:dark:bg-default rounded-lg",
-        ],
-      }}
-      isBlurred
-    >
-      <NavbarContent
-        className=" sm:flex gap-4"
-        justify="center"
-      >
-        {routes.map((section: routeProps) => (
-          <NavbarItem
-            key={section.url}
-            isActive={pathname === section.url}
-          >
-            <Link
-              className="px-3 py-1.5 rounded-lg"
-              color="foreground"
-              href={section.url}
-            >
-              {section.label}
-            </Link>
-          </NavbarItem>
-        ))}
-      </NavbarContent>
-    </Navbar>
+        {/* Navigation Links on Right */}
+        <nav className="flex items-center gap-4 sm:gap-6">
+          {routes.map((route) => {
+            const isActive = pathname === route.url;
+            return (
+              <Link
+                key={route.url}
+                href={route.url}
+                className={`text-xs sm:text-sm font-extrabold tracking-wider transition-all duration-200 bento-btn-poppy px-2.5 py-1 rounded-lg ${
+                  isActive
+                    ? "bg-[#141416] text-[#FFF7EB] shadow-sm"
+                    : "text-[#141416]/80 hover:text-[#CC3A63] hover:bg-[#141416]/5"
+                }`}
+              >
+                {route.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+    </header>
   );
 };

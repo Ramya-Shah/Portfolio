@@ -2,8 +2,8 @@ import { whoAmIDataType } from "../types/whoAmIData";
 
 export const whoAmIData: whoAmIDataType = {
     fullName: "Ramya Shah",
-    profession: "Fullstack developer",
+    profession: "Software Engineer",
     whoAmI:
-        "I am a Full-Stack Developer with a strong passion for building clean, efficient, and user-friendly applications that solve real-world problems. I enjoy transforming ideas into functional and visually appealing digital experiences. I love working on both the frontend and backend to create seamless, high-performing applications. My focus is on writing clean, maintainable code while ensuring optimal performance, responsiveness, and a great user experience.",
-        quote: "I really like creating software solutions",
-    };
+        "Software engineer focused on backend, full-stack, distributed systems, high-throughput infrastructure, and AI-enabled workflows, with professional experience building internal products, data architecture, and automation systems under the CFO's office at Meesho. Graduated from DA-IICT with a B.Tech. (Hons.) in ICT and Minor in Computational Science (CPI: 8.6).",
+    quote: "Building scalable, high-throughput systems and AI-enabled workflows from scratch with high ownership and engineering rigor.",
+};

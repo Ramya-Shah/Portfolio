@@ -3,25 +3,77 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --bg-blue2: #33c0dd;
+  --bento-cream: #FCFAF6;
+  --bento-sand: #F9F0E0;
+  --bento-sage: #A2AB73;
+  --bento-rose: #CC3A63;
+  --bento-dark: #141416;
+  color-scheme: light !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-    --bg-blue2: #33c0dd;
+/* Force light cream palette across all base document roots */
+html,
+body,
+main,
+#__next,
+[data-overlay-container="true"] {
+  background-color: #FCFAF6 !important;
+  color: #141416 !important;
+  color-scheme: light !important;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* NextUI light/dark override to prevent any dark canvas paint */
+:root,
+.light,
+.dark,
+[data-theme],
+[data-theme="light"],
+[data-theme="dark"] {
+  --nextui-background: 40 33% 98% !important; /* #FCFAF6 */
+  --nextui-foreground: 240 6% 8% !important;   /* #141416 */
+  color-scheme: light !important;
+}
+
+/* Poppy, bouncy spring transitions */
+.bento-poppy {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+.bento-poppy:hover {
+  transform: translateY(-8px) scale(1.012);
+  box-shadow: 0 24px 44px -12px rgba(40, 32, 20, 0.16), 0 0 0 1.5px rgba(162, 171, 115, 0.35);
+}
+
+.bento-btn-poppy {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.bento-btn-poppy:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 20px -4px rgba(204, 58, 99, 0.3);
+}
+
+.bento-btn-poppy:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+/* Glassmorphism on warm beige */
+.bento-glass {
+  background: rgba(249, 240, 224, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 247, 235, 0.8);
+}
+
+/* Hide native cursor on desktop to give way to custom fluid cursor */
+@media (pointer: fine) {
+  body, a, button, input, textarea, [role="button"], select {
+    cursor: none !important;
   }
-}
-
-.bg-blue {
-  background-color: #0d3c52;
-}
-
-.text-blue {
-  color: #1684a7;
 }

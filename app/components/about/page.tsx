@@ -1,121 +1,128 @@
 "use client";
-import { useEffect } from "react";
-import Image from "next/image";
 
-import { Avatar } from "@nextui-org/avatar";
-// import { Button } from "@nextui-org/button";
-import { Card, CardBody } from "@nextui-org/card";
+import { BentoDashboard } from "../BentoDashboard";
+import { Experience } from "../Experience";
 import { Tooltip } from "@nextui-org/tooltip";
-
-import { Education } from "../Education";
-import { iconType, educationType } from "@/app/types";
-import { educationList, techonologyIconList, whoAmIData } from "@/app/utils";
-import aboutAnimation from "../../utils/aboutSectionAnimations";
+import { techonologyIconList, whoAmIData } from "@/app/utils";
 import IconComponent from "../ui/IconComponent";
-
-const { fullName, profession, whoAmI, quote } = whoAmIData;
+import { iconType } from "@/app/types";
 
 export default function About() {
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
+  const { whoAmI, quote } = whoAmIData;
 
-    if (mq.matches) {
-      aboutAnimation.whoAmIAnimation();
-      aboutAnimation.professionAnimation();
-      aboutAnimation.quoteAnimation();
-      aboutAnimation.techonologyIconListAnimation();
-      aboutAnimation.verticalImageAnimation();
-      aboutAnimation.educationContentAnimation();
-    } else {
-      aboutAnimation.mobileAnimation();
-    }
-  }, []);
+  const skillGroups = [
+    {
+      category: "Languages",
+      skills: ["Python", "TypeScript", "C++", "JavaScript", "SQL"],
+    },
+    {
+      category: "Backend & Distributed",
+      skills: ["Node.js", "Fastify", "Express", "Docker", "Kubernetes", "Kafka", "WebRTC"],
+    },
+    {
+      category: "Databases & Storage",
+      skills: ["PostgreSQL", "ClickHouse", "Redis", "MongoDB", "Prisma"],
+    },
+    {
+      category: "Frontend & UI",
+      skills: ["React", "Next.js", "Tailwind CSS", "Shadcn UI"],
+    },
+    {
+      category: "Testing & Architecture",
+      skills: ["Jest", "Vitest", "Swagger", "Idempotent ETL"],
+    },
+  ];
 
   return (
-    <div className="grid grid-rows-8 grid-cols-4 lg:grid-cols-3 gap-5">
-      <Card className="col-span-full lg:row-start-2 lg:row-span-2 lg:col-start-2 lg:col-span-1">
-        <CardBody className="flex-col items-center justify-center gap-2">
-          <Avatar
-            name="profile"
-            src="./profile.jpg"
-            className="w-26 h-24 text-large brightness-80"
-          />
-          <h1 className="text-4xl font-bold">{fullName}</h1>
+    <div className="flex flex-col gap-12 w-full">
+      {/* 1. Bento Dashboard Matching Reference Design */}
+      <BentoDashboard />
 
-          {/* <Button>Download CV</Button> */}
-        </CardBody>
-      </Card>
+      {/* 2. Professional Experience & Systems Timeline */}
+      <Experience />
 
-      <Card className="col-span-full lg:row-start-1 lg:row-span-1 lg:col-span-2  opacity-0 mobile-animation whoAmICard">
-        <CardBody className="gap-2">
-          <div className="text-3xl font-bold">Who am I?</div>
-          <div className="text-lg text-gray-400">{whoAmI} </div>
-        </CardBody>
-      </Card>
-
-      <Card className="col-span-full row-start-2 row-end-3 lg:row-start-2 lg:col-start-1 lg:col-span-1 bg-blue opacity-0 mobile-animation professionCard">
-        <CardBody className="justify-center items-center">
-          <h2 className="text-2xl lg:text-3xl font-bold  text-center">
-            {profession}
-          </h2>
-        </CardBody>
-      </Card>
-
-      <Card className="hidden lg:flex col-span-2 lg:row-start-3 lg:row-span-1 lg:col-start-3 lg:col-span-1 bg-blue opacity-0 mobile-animation quoteCard">
-        <CardBody className="justify-center items-center lg:row-start-2 lg:cols-start-4">
-          <div className="text-3xl font-bold text-center">
-            &#34;{quote}&#34;
+      {/* 3. Categorized Technical Stack in Cream Bento Palette */}
+      <section className="flex flex-col gap-6 py-4">
+        <div className="flex flex-col gap-2">
+          <div className="inline-flex items-center gap-2 text-[#A2AB73] font-bold text-xs uppercase tracking-widest">
+            <span>Stack &amp; Capabilities</span>
           </div>
-        </CardBody>
-      </Card>
-
-      <Card className="col-span-full lg:row-start-3 lg:row-span-2 lg:col-start-1 lg:col-span-1 opacity-0 mobile-animation technologyIconList">
-        <CardBody className="gap-4">
-          <h2 className="text-3xl font-bold">
-            Technologies I have worked with
+          <h2 className="text-3xl sm:text-4xl font-black text-[#141416] tracking-normal">
+            Skills &amp; Technologies
           </h2>
+          <p className="text-[#141416]/75 text-sm sm:text-base max-w-2xl font-medium leading-relaxed">
+            Core technologies and distributed engines utilized across production workflows.
+          </p>
+        </div>
 
-          <div className="flex flex-wrap justify-center lg:justify-center gap-x-10 gap-y-6">
+        <div className="rounded-3xl bg-[#F9F0E0] text-[#141416] p-7 sm:p-9 shadow-xl border border-[#FFF7EB]/60 bento-poppy flex flex-col gap-8">
+          {/* Interactive Icon Grid */}
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 py-3 border-b border-[#141416]/10">
             {techonologyIconList.map(({ name, icon }: iconType) => (
               <Tooltip
                 key={`technology-item-${name}`}
                 content={name}
+                placement="top"
+                className="bg-[#141416] text-[#FFF7EB] text-xs font-bold px-3 py-1 rounded-lg shadow-xl"
               >
-                <IconComponent icon={icon} />
-                {/* <Chip variant="flat">{name}</Chip> */}
+                <div className="p-3.5 rounded-2xl bg-white border border-[#141416]/15 hover:border-[#CC3A63] hover:shadow-lg bento-btn-poppy cursor-pointer flex items-center justify-center shadow-xs">
+                  <IconComponent icon={icon} />
+                </div>
               </Tooltip>
             ))}
           </div>
-        </CardBody>
-      </Card>
 
-      {/* vertical img */}
-      <div className="hidden lg:block lg:row-start-1 lg:row-span-2 lg:col-start-3  lg:h-[400px] rounded-xl relative opacity-0 mobile-animation verticalImage">
-        <Image
-          src="/about.png"
-          priority={true}
-          alt="profile image"
-          fill
-          className="object-cover rounded-[15px]"
-        />
-      </div>
-
-      <Card className="col-span-full lg:row-start-4 lg:row-span-1 lg:col-start-2 lg:col-span-2 opacity-0 mobile-animation educationContent">
-        <CardBody className="gap-2 flex-wrap">
-          <h2 className="text-3xl font-bold ">Education</h2>
-
-          <div className="flex flex-col lg:flex-col gap-2">
-            {educationList.map((education: educationType) => (
-              <Education
-                key={`education-item-${education.career}`}
-                career={education.career}
-                years={education.years}
-                description={education.description}
-              />
+          {/* Categorized Matrix */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {skillGroups.map((group, gIdx) => (
+              <div
+                key={`group-${gIdx}`}
+                className="flex flex-col gap-2.5 p-5 rounded-2xl bg-[#141416]/5 border border-[#141416]/10 bento-poppy"
+              >
+                <span className="text-xs font-extrabold uppercase tracking-wider text-[#CC3A63]">
+                  {group.category}
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.skills.map((skill, sIdx) => (
+                    <span
+                      key={`skill-${sIdx}`}
+                      className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[#FFF7EB] text-[#141416] border border-[#141416]/15 shadow-xs"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
-        </CardBody>
-      </Card>
+        </div>
+      </section>
+
+      {/* 4. Engineering Philosophy & Bio */}
+      <section className="flex flex-col gap-6 py-4 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 rounded-3xl bg-[#F9F0E0] text-[#141416] p-7 sm:p-9 shadow-xl border border-[#FFF7EB]/60 bento-poppy flex flex-col gap-3">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#A2AB73]">
+              Engineering Mindset
+            </span>
+            <h3 className="text-2xl font-black text-[#141416] tracking-tight">
+              High Ownership, Rigorous Validation &amp; End-to-End Systems
+            </h3>
+            <p className="text-sm font-medium text-[#141416]/80 leading-relaxed mt-2">
+              {whoAmI}
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-[#A2AB73]/20 text-[#141416] p-7 sm:p-9 shadow-xl border border-[#A2AB73]/40 bento-poppy flex flex-col justify-center gap-3">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#CC3A63]">
+              Core Principle
+            </span>
+            <blockquote className="text-xl sm:text-2xl font-black text-[#141416] italic leading-snug">
+              &ldquo;{quote}&rdquo;
+            </blockquote>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
