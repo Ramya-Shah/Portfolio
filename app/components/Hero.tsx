@@ -28,7 +28,7 @@ export const Hero = () => {
       sublabel: "Next.js Web Applications",
     },
     {
-      value: "8.56 CPI",
+      value: "8.6 CPI",
       label: "Academic Standing",
       sublabel: "DA-IICT B.Tech. (Hons.)",
     },
