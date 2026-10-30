@@ -52,7 +52,7 @@ export default function Projects() {
           Featured Systems &amp; Projects
         </h1>
         <p className="text-[#141416]/75 text-sm sm:text-base max-w-2xl font-medium">
-          High-throughput engines, telemetry SDKs, bitemporal metrics stores, and AI-enabled product architectures.
+          High-throughput engines, telemetry SDKs, live AI products with payments, and AI agent architectures.
         </p>
       </div>
 

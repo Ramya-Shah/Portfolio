@@ -18,46 +18,66 @@ export type ExperienceItem = {
 
 export const experienceData: ExperienceItem[] = [
   {
-    role: "Business Analyst (Finance & Automation)",
+    role: "Business Analyst",
     company: "Meesho",
-    department: "CFO's Office",
+    department: "Finance & Product Analytics",
     location: "Bangalore, India",
     period: "Jan 2026 – Present",
     description:
-      "Full-time engineering ownership under the CFO's office building internal data products, bitemporal metrics stores, and automated AI workflows.",
-    technologies: ["Python", "SQL", "Databricks Genie", "MCP", "REST APIs", "Bitemporal Stores", "ETL Pipelines"],
+      "Product experimentation, natural-language analytics and AI internal tools across finance, FP&A, investor relations and product analytics at a 100M+ user company, with SQL root-cause analysis and Python automation for executive reporting.",
+    technologies: ["Python", "SQL", "Databricks Genie", "Claude API", "Automation", "Product Analytics", "RCA"],
     systems: [
       {
-        name: "Investor Relations CRM & Ingestion Engine",
+        name: "Product Experiments on the Meesho App",
         summary:
-          "Engineered an automated Python email ingestion pipeline converting unstructured investor conversations into an auditable 13-column schema. Implemented idempotent upserts with Gmail thread_id keys and atomic writes.",
+          "Brainstormed and ran experiments on the Meesho app to lift shopper engagement and conversion.",
         metrics: [
-          "906 relationship references resolved with 0 dangling entities",
-          "~46% ingestion cost reduction across 3,000-thread backlog",
-          "Idempotent load store with atomic superseded logging",
+          "Added a \"Trendy\" tag that boosted click-per-view",
+          "Added real user review videos on the product page, boosting order-per-view",
         ],
-        technologies: ["Python", "Structured Extraction", "Idempotency", "Data Validation"],
+        technologies: ["Experimentation", "Product Analytics", "SQL"],
       },
       {
-        name: "Daily Flash Bitemporal Reporting Store",
+        name: "Databricks Genie for Natural-Language Analytics",
         summary:
-          "Designed a bitemporal data store across 48 daily snapshots with key (metric, business_date, as_of_date) to validate publication consistency across 79 executive metrics.",
+          "Configured and deployed Genie for the team: gathered stakeholder requirements, connected data sources and designed the prompting method that turns plain-English questions into actionable data.",
         metrics: [
-          "Discovered 2,254 of 6,095 cells (~37%) silently restated after publication",
-          "Audited 28 report run-logs to detect upstream silent pipeline failures",
-          "Prevented erroneous metric publishing during upstream scheduler outages",
+          "150+ business metrics onboarded",
+          "Used by 15 stakeholders",
+          "Removed almost all of the team's data-pull requests",
         ],
-        technologies: ["Temporal Modeling", "SQL", "Pipeline SLA Monitoring", "Root Cause Analysis"],
+        technologies: ["Databricks Genie", "SQL", "Prompt Design"],
       },
       {
-        name: "Databricks Genie + Claude MCP Integration",
+        name: "Daily Flash Automation",
         summary:
-          "Deployed Databricks Genie spaces mapping North Star financial metrics for natural-language business queries, and built a custom Model Context Protocol (MCP) connection linking Genie directly to Claude.",
+          "Built a parse, validate and publish pipeline with the CFO's office for the daily metrics flash read every morning by the CEO, CXOs, VPs and directors.",
         metrics: [
-          "Self-serve data querying reducing repetitive analyst intervention",
-          "Custom Model Context Protocol (MCP) bridge for LLM reasoning",
+          "~1.5 hours of manual review per day fully automated",
+          "79 metrics covered",
+          "Found 37% of published cells (2,254 of 6,095) were later restated",
         ],
-        technologies: ["Databricks Genie", "MCP", "Claude API", "Workflow Automation"],
+        technologies: ["Python", "SQL", "Data Validation", "SLA Alerts"],
+      },
+      {
+        name: "Claude API Company-Profile Agent",
+        summary:
+          "Built an agent on the Claude API with Google search that writes a fixed-template profile of every investor company Meesho tracks, including each investor's actual shareholding in Meesho where applicable.",
+        metrics: [
+          "Profiles for all tracked investor companies",
+          "Output feeds the investor CRM",
+        ],
+        technologies: ["Claude API", "Google Search", "Python"],
+      },
+      {
+        name: "Investor CRM",
+        summary:
+          "Live, internally hosted CRM for investor meetings used by CXOs and directors, combining past emails, calendar meetings, meeting notes, AI-generated company profiles and every contact at each investor (analysts, CFOs, CIOs).",
+        metrics: [
+          "5,000+ investor emails and 300 meeting notes onboarded",
+          "Used by CXOs and directors before investor meetings",
+        ],
+        technologies: ["Python", "Data Pipelines", "Internal Tools"],
       },
     ],
   },
@@ -75,7 +95,7 @@ export const experienceData: ExperienceItem[] = [
         summary:
           "Built cloud automation workflows and Google Sheets API integration to streamline recurring operational reporting.",
         metrics: [
-          "80% reduction in manual reporting effort",
+          "80% reduction in manual reporting effort across 3 client accounts",
           "Automated scheduled batch exports and alerting",
         ],
         technologies: ["AWS", "Google APIs", "Python", "Cloud Automation"],

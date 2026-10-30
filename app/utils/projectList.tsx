@@ -21,6 +21,41 @@ import { ProjectType } from "../types";
 export const ProjectList: ProjectType[] = [
     {
         icon: <ShadcnLandingSVG />,
+        title: "Snap-to-Pay",
+        subtitle: "AI Bill Reader with Razorpay Payments",
+        category: "ai",
+        metricBadge: "Gemini × Razorpay",
+        technologies: [
+            {
+                name: "Next.js",
+                icon: <NextSVG color="#000000" size={16} />,
+            },
+            {
+                name: "TypeScript",
+                icon: <TypescriptSVG color="#3178C6" size={16} />,
+            },
+            {
+                name: "Gemini AI",
+                icon: <ShadcnSVG color="#6366F1" size={16} />,
+            },
+            {
+                name: "Razorpay",
+                icon: <ShadcnSVG color="#3395FF" size={16} />,
+            },
+            {
+                name: "Tailwind CSS",
+                icon: <TailwindSVG color="#06B6D4" size={16} />,
+            },
+        ],
+        description:
+            "Live AI app for small Indian shops: snap a handwritten bill, paste a WhatsApp order or speak it, and Gemini (image, text and audio in one prompt) returns schema-validated JSON as an editable itemized bill with unsure lines flagged. The server, not the model, computes the total. One tap creates a Razorpay order with a QR code and WhatsApp pay link; HMAC-verified Checkout redirects the customer to a receipt and PDF invoice. Database-free (each bill lives in its order notes), test-key-only, and ₹0 to run.",
+        imgUrl: "/snaptopay.png",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/snap-to-pay",
+        websiteUrl: "https://snap-to-pay.vercel.app",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
         title: "TaskForge",
         subtitle: "Distributed Task Queue & Observability Engine",
         category: "systems",
@@ -61,9 +96,9 @@ export const ProjectList: ProjectType[] = [
     {
         icon: <ShadcnLandingSVG />,
         title: "CodePulse",
-        subtitle: "Real-Time Code Observability Platform",
+        subtitle: "Zero-Config Node.js Monitoring with AI Root Cause",
         category: "systems",
-        metricBadge: "npm SDK · ClickHouse",
+        metricBadge: "~1,500 payloads/s",
         technologies: [
             {
                 name: "TypeScript",
@@ -74,8 +109,12 @@ export const ProjectList: ProjectType[] = [
                 icon: <FastifySVG color="#000000" size={16} />,
             },
             {
-                name: "ClickHouse",
-                icon: <ClickHouseSVG color="#FFCC00" size={16} />,
+                name: "PostgreSQL",
+                icon: <PostgreSQLSVG color="#336791" size={20} />,
+            },
+            {
+                name: "Gemini AI",
+                icon: <ShadcnSVG color="#6366F1" size={16} />,
             },
             {
                 name: "React",
@@ -87,11 +126,11 @@ export const ProjectList: ProjectType[] = [
             },
         ],
         description:
-            "Real-time telemetry and APM platform with a published zero-dependency npm SDK (codepulse-sdk) using ES6 proxy module interception. Features a Fastify ingestion microservice processing batched telemetry payloads, ClickHouse MergeTree storage for low-latency analytical queries across millions of events, and a live WebSocket dashboard.",
-        imgUrl: "/codepulse.png",
+            "One line of setup and a published zero-dependency npm SDK (codepulse-sdk) times every exported function via module-load interception and ES6 Proxies, with latency histograms and dead-code detection. A Fastify + Postgres ingest with per-minute histogram rollups sustained ~1,500 batched payloads/s (~26K rows/s) with zero loss in load tests and serves p95 queries in under 10 ms over 100M+ recorded calls. A Gemini root-cause panel and code chat explain the hotspot from live telemetry and source; its fix for the demo's N+1 bottleneck cut latency from ~110 ms to ~12 ms when run. Deployed on GCP + Vercel with a replay fallback.",
+        imgUrl: "/codepulse-live.png",
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah/codepulse",
-        websiteUrl: "https://codepulse-codepulse-dashboard.vercel.app/",
+        websiteUrl: "https://codepulse-live.vercel.app/",
     },
     {
         icon: <ShadcnLandingSVG />,
@@ -153,7 +192,7 @@ export const ProjectList: ProjectType[] = [
             },
         ],
         description:
-            "Automated quantitative research platform for strategy synthesis, risk audit, and systematic execution. Backtests trading strategies against historical Limit Order Book (LOB) data processing 247K+ market events per run via hftbacktest, with DuckDB research memory for out-of-sample validation to eliminate overfitting.",
+            "AI quant research platform where a 4-agent LangGraph workflow (strategy synthesis, risk audit, execution, self-correction) generates and refines market-making strategies. Untrusted AI-generated Python runs through a secure FastMCP pipeline with static AST analysis, Docker sandboxing and interface-contract checks before backtesting. Replays 247K+ real limit-order-book events per run via hftbacktest, with DuckDB retrieval memory feeding successful strategies into future prompts and out-of-sample validation against overfitting.",
         imgUrl: "/alphaforge.png",
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah/AlphaForge",
@@ -188,11 +227,11 @@ export const ProjectList: ProjectType[] = [
             },
         ],
         description:
-            "Production-grade URL shortener with collision-free Base62 encoding derived mathematically from sequential IDs. Features sub-10ms redirects via Redis cache-aside, asynchronous Celery workers for geo/device analytics with 1-second deduplication windows, and a 5-container Docker Compose deployment with Caddy reverse proxy.",
+            "Production-grade URL shortener with collision-free Base62 encoding derived mathematically from sequential IDs. Features sub-10ms redirects via Redis cache-aside, asynchronous Celery workers for geo/device analytics with 1-second deduplication windows, JWT auth for the UI plus hashed API keys for programmatic access, and a 5-container Docker Compose deployment on GCP behind Caddy with automatic Let's Encrypt HTTPS.",
         imgUrl: "/shrinkly.png",
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah",
-        websiteUrl: "",
+        websiteUrl: "https://shortener-ramya.duckdns.org/",
     },
     {
         icon: <ShadcnLandingSVG />,

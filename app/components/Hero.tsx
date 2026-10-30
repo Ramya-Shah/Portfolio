@@ -20,7 +20,7 @@ export const Hero = () => {
     {
       value: "2,250+ Cells",
       label: "Restatements Uncovered",
-      sublabel: "Meesho Bitemporal Store",
+      sublabel: "Meesho Daily Flash",
     },
     {
       value: "528K+ Users",
@@ -28,7 +28,7 @@ export const Hero = () => {
       sublabel: "Next.js Web Applications",
     },
     {
-      value: "8.6 CPI",
+      value: "8.56 CPI",
       label: "Academic Standing",
       sublabel: "DA-IICT B.Tech. (Hons.)",
     },

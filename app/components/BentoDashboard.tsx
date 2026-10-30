@@ -190,7 +190,7 @@ export const BentoDashboard = () => {
             href="/projects"
             className="pt-3 text-xs font-black text-[#CC3A63] hover:text-[#141416] transition-colors flex items-center justify-between uppercase tracking-wider"
           >
-            <span>View All 10 Projects</span>
+            <span>View All {featuredProjects.length} Projects</span>
             <span>→</span>
           </Link>
         </div>
@@ -207,7 +207,7 @@ export const BentoDashboard = () => {
               DA-IICT · B.Tech. (Hons.) in ICT
             </h3>
             <p className="text-sm font-medium text-[#141416]/75 leading-relaxed">
-              Minor in Computational Science · <strong className="text-[#141416] font-extrabold">CPI: 8.6</strong> · JEE Mains AIR 1508. Focused on rigorous systems fundamentals, concurrency, and high-performance databases.
+              Minor in Computational Science · <strong className="text-[#141416] font-extrabold">CPI: 8.56</strong> · JEE Advanced AIR 2181 · JEE Mains AIR 1508 · Winner of IEEE Tic-Tech-Toe 2025 among 150+ teams. Focused on rigorous systems fundamentals, concurrency, and high-performance databases.
             </p>
           </div>
 
@@ -226,7 +226,7 @@ export const BentoDashboard = () => {
               <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">Edge Users</div>
             </div>
             <div className="p-3 rounded-2xl bg-[#141416]/5 text-center">
-              <div className="text-xl font-black text-[#CC3A63]">8.6</div>
+              <div className="text-xl font-black text-[#CC3A63]">8.56</div>
               <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">Honours CPI</div>
             </div>
           </div>

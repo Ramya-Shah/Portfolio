@@ -13,19 +13,27 @@ export default function About() {
   const skillGroups = [
     {
       category: "Languages",
-      skills: ["Python", "TypeScript", "C++", "JavaScript", "SQL"],
+      skills: ["Python", "TypeScript", "C++", "Java", "Golang", "JavaScript", "SQL"],
     },
     {
       category: "Backend & Distributed",
-      skills: ["Node.js", "Fastify", "Express", "Docker", "Kubernetes", "Kafka", "WebRTC"],
+      skills: ["Node.js", "Fastify", "FastAPI", "Express", "Celery", "WebSockets", "Socket.IO", "Zod", "Docker", "Kubernetes", "Kafka", "WebRTC"],
     },
     {
       category: "Databases & Storage",
-      skills: ["PostgreSQL", "ClickHouse", "Redis", "MongoDB", "Prisma"],
+      skills: ["PostgreSQL", "Redis", "ClickHouse", "DuckDB", "MongoDB", "Prisma"],
+    },
+    {
+      category: "AI & GenAI",
+      skills: ["LangGraph", "LangChain", "Claude API", "OpenAI API", "Gemini API", "MCP / FastMCP", "Databricks Genie", "PyTorch", "scikit-learn", "Prompt Engineering"],
     },
     {
       category: "Frontend & UI",
       skills: ["React", "Next.js", "Tailwind CSS", "Shadcn UI"],
+    },
+    {
+      category: "Cloud & Payments",
+      skills: ["GCP", "AWS EC2", "Vercel", "Caddy", "Nginx", "GitHub Actions", "Razorpay"],
     },
     {
       category: "Testing & Architecture",
