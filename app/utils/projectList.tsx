@@ -56,6 +56,107 @@ export const ProjectList: ProjectType[] = [
     },
     {
         icon: <ShadcnLandingSVG />,
+        title: "OAuth Ready",
+        subtitle: "OAuth App Setup & Approval Guides with a Live Research Agent",
+        category: "ai",
+        metricBadge: "172 claims verified",
+        technologies: [
+            {
+                name: "Next.js",
+                icon: <NextSVG color="#000000" size={16} />,
+            },
+            {
+                name: "TypeScript",
+                icon: <TypescriptSVG color="#3178C6" size={16} />,
+            },
+            {
+                name: "Gemini AI",
+                icon: <ShadcnSVG color="#6366F1" size={16} />,
+            },
+            {
+                name: "Upstash Redis",
+                icon: <RedisSVG color="#DC382D" size={16} />,
+            },
+            {
+                name: "Vitest",
+                icon: <ShadcnSVG color="#6E9F18" size={16} />,
+            },
+        ],
+        description:
+            "Tells developers building AI agents whether getting an OAuth app approved for Gmail, Slack and others takes an hour or weeks. Each guide leads with the verdict, splits hands-on work from the provider's required wait, and names the blocker most likely to stop you. A live agent writes a guide for any app in about a minute: Tavily search, an SSRF-guarded page fetcher, live endpoint probes and Gemini drafting, with evidence labels enforced in code (a claim is 'official' only if its quote is found word for word on the provider's own page). 172 library claims checked against official docs: 110 confirmed, 50 corrected.",
+        imgUrl: "/oauthready.png",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/oauth-ready",
+        websiteUrl: "https://oauth-ready-ten.vercel.app",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
+        title: "Day-Ahead Wind Forecast Monitor",
+        subtitle: "GB Wind Forecast Accuracy at Auction Close",
+        category: "fullstack",
+        metricBadge: "744 hours analysed",
+        technologies: [
+            {
+                name: "Python",
+                icon: <PythonSVG color="#3776AB" size={16} />,
+            },
+            {
+                name: "FastAPI",
+                icon: <ShadcnSVG color="#009688" size={16} />,
+            },
+            {
+                name: "React",
+                icon: <ReactSVG color="#61DAFB" size={16} />,
+            },
+            {
+                name: "TypeScript",
+                icon: <TypescriptSVG color="#3178C6" size={16} />,
+            },
+            {
+                name: "Docker",
+                icon: <DockerSVG color="#2496ED" size={16} />,
+            },
+        ],
+        description:
+            "For a UK utility buying power on the GB day-ahead market: shows the national wind forecast it actually had when the N2EX or EPEX auction closed, and how far off it was, for every delivery day in January 2026 using public Elexon data. Daylight-saving-aware gate selection picks the latest forecast published before the gate; pure-function metrics give a 2,000 MW typical miss and a constant 1,730 MW over-forecast traced to a curtailment and coverage mismatch. FastAPI over a committed data snapshot, React and Recharts frontend, about 40 pytest tests and GitHub Actions CI, deployed on Vercel.",
+        imgUrl: "/windforecast.png",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/wind-forecast-monitor",
+        websiteUrl: "https://wind-forecast-monitor-zeta.vercel.app",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
+        title: "PlacidWay Facebook Automation",
+        subtitle: "Daily AI-Written Facebook Posts with Medical Guardrails",
+        category: "ai",
+        metricBadge: "Make.com × Gemini",
+        technologies: [
+            {
+                name: "Make.com",
+                icon: <ShadcnSVG color="#6D00CC" size={16} />,
+            },
+            {
+                name: "Gemini AI",
+                icon: <ShadcnSVG color="#6366F1" size={16} />,
+            },
+            {
+                name: "Facebook Graph API",
+                icon: <ShadcnSVG color="#1877F2" size={16} />,
+            },
+            {
+                name: "Gmail",
+                icon: <ShadcnSVG color="#EA4335" size={16} />,
+            },
+        ],
+        description:
+            "A no-code Make.com workflow that turns one new PlacidWay article into one Facebook post every day. It reads the article sitemap, skips anything already posted using a data store, and has Gemini write the post. Two guardrail layers must both pass before it publishes: a second Gemini call that checks the post against its source for medical claims, promises and invented numbers, plus fixed keyword and length rules. It can auto-publish or email the draft for human approval, logs every run, and sends Gmail alerts with retries. Posts only to a test Page, at $0 a month.",
+        imgUrl: "/placidway-flow.png",
+        videoUrl: "",
+        githubUrl: "https://drive.google.com/file/d/1YvVD9WwN476ABub3IU4-fB9GWFVmCrQE/view",
+        websiteUrl: "https://us2.make.com/public/shared-scenario/hpSAMDGzmzQ/placid-way-facebook-daily-post",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
         title: "TaskForge",
         subtitle: "Distributed Task Queue & Observability Engine",
         category: "systems",
