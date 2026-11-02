@@ -4,10 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MandalaSVG } from "./ui/icons";
-import { whoAmIData, contactData, ProjectList } from "../utils";
+import { contactData, ProjectList } from "../utils";
 
 export const BentoDashboard = () => {
-  const { fullName } = whoAmIData;
   const { email, github, linkedIn } = contactData;
 
   // Projects list for the interactive Right-Hand Widget (All 10 projects displayed)
@@ -20,9 +19,9 @@ export const BentoDashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 w-full">
         
         {/* ========================================================================= */}
-        {/* CARD 1: Large Headline + Geometric Mandala (Top-Left: 2 Cols, 1 Row)     */}
+        {/* CARD 1: Large Headline + Geometric Mandala (Top-Left: 3 Cols, 1 Row)     */}
         {/* ========================================================================= */}
-        <div className="col-span-1 md:col-span-2 lg:col-span-2 rounded-3xl bg-[#F9F0E0] text-[#141416] p-7 sm:p-9 flex flex-col justify-between shadow-xl border border-[#FFF7EB]/60 bento-poppy relative overflow-hidden group">
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 rounded-3xl bg-[#F9F0E0] text-[#141416] p-7 sm:p-9 flex flex-col justify-between shadow-xl border border-[#FFF7EB]/60 bento-poppy relative overflow-hidden group">
           {/* Top Row: Status Badge & Geometric Wireframe Flower */}
           <div className="flex items-start justify-between z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#141416]/5 border border-[#141416]/10">
@@ -62,31 +61,6 @@ export const BentoDashboard = () => {
             >
               Get In Touch
             </Link>
-          </div>
-        </div>
-
-        {/* ========================================================================= */}
-        {/* CARD 2: Portrait Visual (Top-Center: 1 Col, 1 Row)                       */}
-        {/* ========================================================================= */}
-        <div className="col-span-1 md:col-span-1 lg:col-span-1 rounded-3xl bg-[#F9F0E0] overflow-hidden shadow-xl border border-[#FFF7EB]/60 bento-poppy relative min-h-[300px] lg:min-h-0 group">
-          <div className="relative w-full h-full min-h-[300px]">
-            <Image
-              src="/profile.jpg"
-              alt={fullName}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-              priority
-              className="object-cover transition-transform duration-700 group-hover:scale-105 filter contrast-105"
-            />
-            {/* Elegant overlay badge */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-5">
-              <span className="text-lg font-black text-[#FFF7EB] tracking-normal">
-                {fullName}
-              </span>
-              <span className="text-xs font-semibold text-[#A2AB73]">
-                DA-IICT B.Tech. (Hons.)
-              </span>
-            </div>
           </div>
         </div>
 
@@ -214,16 +188,16 @@ export const BentoDashboard = () => {
           {/* Proof Points Strip in Cream Palette */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 border-t border-[#141416]/10">
             <div className="p-3 rounded-2xl bg-[#141416]/5 text-center">
-              <div className="text-xl font-black text-[#141416]">986/s</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">Throughput</div>
+              <div className="text-xl font-black text-[#141416]">AIR 2181</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">JEE Advanced</div>
             </div>
             <div className="p-3 rounded-2xl bg-[#141416]/5 text-center">
-              <div className="text-xl font-black text-[#141416]">2,250+</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">Restatements</div>
+              <div className="text-xl font-black text-[#141416]">AIR 1508</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">JEE Mains</div>
             </div>
             <div className="p-3 rounded-2xl bg-[#141416]/5 text-center">
-              <div className="text-xl font-black text-[#141416]">528K+</div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">Edge Users</div>
+              <div className="text-xl font-black text-[#141416]">Winner</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-[#A2AB73]">Hackathon</div>
             </div>
             <div className="p-3 rounded-2xl bg-[#141416]/5 text-center">
               <div className="text-xl font-black text-[#CC3A63]">8.6</div>
