@@ -1,0 +1,68 @@
+.page {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  border-top: var(--rule);
+  border-left: var(--rule);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 18px;
+  border-right: var(--rule);
+  border-bottom: var(--rule);
+  background: var(--paper);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 46px;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.filter:hover {
+  color: var(--signal);
+}
+
+.filter[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff;
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+  color: var(--signal);
+}
+
+.filter[aria-pressed="true"] .count {
+  color: #ffb39c;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    width: 100%;
+  }
+
+  .filter {
+    flex: 1 1 auto;
+  }
+}

@@ -21,6 +21,45 @@ import { ProjectType } from "../types";
 export const ProjectList: ProjectType[] = [
     {
         icon: <ShadcnLandingSVG />,
+        title: "CodePulse",
+        subtitle: "Zero-Config Node.js Monitoring with AI Root Cause",
+        category: "systems",
+        metricBadge: "~1,500 payloads/s",
+        technologies: [
+            {
+                name: "TypeScript",
+                icon: <TypescriptSVG color="#3178C6" size={16} />,
+            },
+            {
+                name: "Fastify",
+                icon: <FastifySVG color="#000000" size={16} />,
+            },
+            {
+                name: "PostgreSQL",
+                icon: <PostgreSQLSVG color="#336791" size={20} />,
+            },
+            {
+                name: "Gemini AI",
+                icon: <ShadcnSVG color="#6366F1" size={16} />,
+            },
+            {
+                name: "React",
+                icon: <ReactSVG color="#61DAFB" size={16} />,
+            },
+            {
+                name: "Docker",
+                icon: <DockerSVG color="#2496ED" size={16} />,
+            },
+        ],
+        description:
+            "One line of setup and a published zero-dependency npm SDK (codepulse-sdk) times every exported function via module-load interception and ES6 Proxies, with latency histograms and dead-code detection. A Fastify + Postgres ingest with per-minute histogram rollups sustained ~1,500 batched payloads/s (~26K rows/s) with zero loss in load tests and serves p95 queries in under 10 ms over 100M+ recorded calls. A Gemini root-cause panel and code chat explain the hotspot from live telemetry and source; its fix for the demo's N+1 bottleneck cut latency from ~110 ms to ~12 ms when run. Deployed on GCP + Vercel with a replay fallback.",
+        imgUrl: "/codepulse-live.png",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/codepulse",
+        websiteUrl: "https://codepulse-live.vercel.app/",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
         title: "Snap-to-Pay",
         subtitle: "AI Bill Reader with Razorpay Payments",
         category: "ai",
@@ -193,45 +232,6 @@ export const ProjectList: ProjectType[] = [
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah/TaskForge",
         websiteUrl: "http://34.27.155.77/",
-    },
-    {
-        icon: <ShadcnLandingSVG />,
-        title: "CodePulse",
-        subtitle: "Zero-Config Node.js Monitoring with AI Root Cause",
-        category: "systems",
-        metricBadge: "~1,500 payloads/s",
-        technologies: [
-            {
-                name: "TypeScript",
-                icon: <TypescriptSVG color="#3178C6" size={16} />,
-            },
-            {
-                name: "Fastify",
-                icon: <FastifySVG color="#000000" size={16} />,
-            },
-            {
-                name: "PostgreSQL",
-                icon: <PostgreSQLSVG color="#336791" size={20} />,
-            },
-            {
-                name: "Gemini AI",
-                icon: <ShadcnSVG color="#6366F1" size={16} />,
-            },
-            {
-                name: "React",
-                icon: <ReactSVG color="#61DAFB" size={16} />,
-            },
-            {
-                name: "Docker",
-                icon: <DockerSVG color="#2496ED" size={16} />,
-            },
-        ],
-        description:
-            "One line of setup and a published zero-dependency npm SDK (codepulse-sdk) times every exported function via module-load interception and ES6 Proxies, with latency histograms and dead-code detection. A Fastify + Postgres ingest with per-minute histogram rollups sustained ~1,500 batched payloads/s (~26K rows/s) with zero loss in load tests and serves p95 queries in under 10 ms over 100M+ recorded calls. A Gemini root-cause panel and code chat explain the hotspot from live telemetry and source; its fix for the demo's N+1 bottleneck cut latency from ~110 ms to ~12 ms when run. Deployed on GCP + Vercel with a replay fallback.",
-        imgUrl: "/codepulse-live.png",
-        videoUrl: "",
-        githubUrl: "https://github.com/Ramya-Shah/codepulse",
-        websiteUrl: "https://codepulse-live.vercel.app/",
     },
     {
         icon: <ShadcnLandingSVG />,

@@ -1,0 +1,61 @@
+.card {
+  height: 100%;
+  scroll-margin-top: 72px;
+}
+
+.highlighted {
+  border-color: var(--signal);
+  box-shadow: 0 0 0 3px var(--signal);
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.metric {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 12px 2px 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--ink);
+}
+
+.metricLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.metricValue {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--signal);
+}
+
+.description {
+  margin: 12px 2px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.chips {
+  margin: 14px 2px 0;
+}
+
+.actions {
+  margin: auto 2px 2px;
+  padding-top: 18px;
+}
+
+.highlighted .description {
+  display: block;
+  overflow: visible;
+}

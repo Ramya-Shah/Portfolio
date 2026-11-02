@@ -1,0 +1,102 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  margin-top: clamp(28px, 4vw, 44px);
+  align-items: start;
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(76px, 10vw, 148px);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+}
+
+.role {
+  margin: 18px 0 28px;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--signal);
+}
+
+.headline {
+  margin: 0;
+  font-size: clamp(28px, 2.6vw, 38px);
+  font-weight: 800;
+  line-height: 1.08;
+  max-width: 24ch;
+  text-wrap: balance;
+}
+
+.heroActions {
+  margin-top: 30px;
+}
+
+.heroSide {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.credentials {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  margin-top: 20px;
+  align-items: start;
+}
+
+.credText {
+  margin: 0;
+  font-size: 18px;
+  max-width: 62ch;
+}
+
+.strong {
+  color: var(--ink);
+}
+
+.spec {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  border-top: var(--rule);
+  border-left: var(--rule);
+}
+
+.spec > div {
+  border-right: var(--rule);
+  border-bottom: var(--rule);
+  padding: 10px 14px 12px;
+  background: var(--paper);
+}
+
+.spec dt {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.spec dd {
+  margin: 2px 0 0;
+  font-size: 34px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.sheetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 22px;
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .credentials,
+  .sheetGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -107,8 +107,8 @@ const FlareCursor: React.FC = () => {
         ref={ringRef}
         className={`fixed top-0 left-0 rounded-full will-change-transform transition-[width,height,background-color,border-color,transform] duration-200 ease-out flex items-center justify-center ${
           isHovered
-            ? 'w-14 h-14 bg-[#CC3A63]/12 border-[1.5px] border-[#CC3A63]/70 backdrop-blur-[2px]'
-            : 'w-9 h-9 bg-[#141416]/5 border-[1.5px] border-[#141416]/30 backdrop-blur-[1px]'
+            ? 'w-14 h-14 bg-[#C43F1A]/12 border-[1.5px] border-[#C43F1A]/70 backdrop-blur-[2px]'
+            : 'w-9 h-9 bg-[#1B2430]/5 border-[1.5px] border-[#1B2430]/30 backdrop-blur-[1px]'
         } ${isClicking ? 'scale-75' : 'scale-100'}`}
       />
 
@@ -117,8 +117,8 @@ const FlareCursor: React.FC = () => {
         ref={dotRef}
         className={`fixed top-0 left-0 rounded-full will-change-transform transition-[width,height,background-color,transform] duration-150 ease-out ${
           isHovered
-            ? 'w-2 h-2 bg-[#CC3A63]'
-            : 'w-1.5 h-1.5 bg-[#141416]'
+            ? 'w-2 h-2 bg-[#C43F1A]'
+            : 'w-1.5 h-1.5 bg-[#1B2430]'
         } ${isClicking ? 'scale-50' : 'scale-100'}`}
       />
     </div>

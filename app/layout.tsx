@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Sofia_Sans, Sofia_Sans_Condensed } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Providers from "./providers";
-import { NavbarSection } from "./components/ui/Navbar";
-const inter = Inter({ subsets: ["latin"] });
+import { Frame } from "./components/drawing/Frame";
 import "./globals.css";
 import FlareCursor from "./components/cursor";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { Toaster } from 'sonner';
+
+const text = Sofia_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-text" });
+const display = Sofia_Sans_Condensed({ subsets: ["latin"], weight: ["600", "800", "900"], variable: "--font-display" });
 
 export const metadata: Metadata = {
   title: "Ramya Shah | Software Engineer",
   description: "Ramya Shah — Software Engineer focused on backend, full-stack, distributed systems, and AI-enabled infrastructure.",
 };
-
-import { Toaster } from 'sonner';
 
 export default function RootLayout({
   children,
@@ -21,20 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="light" style={{ backgroundColor: "#FCFAF6", colorScheme: "light" }}>
-      <body
-        className={`${inter.className} bg-[#FCFAF6] text-[#141416] min-h-screen selection:bg-[#CC3A63] selection:text-white`}
-        style={{ backgroundColor: "#FCFAF6", color: "#141416", colorScheme: "light" }}
-      >
+    <html lang="en" className={`light ${text.variable} ${display.variable}`}>
+      <body className={`${text.className} min-h-screen`}>
         <FlareCursor></FlareCursor>
-        <div className="text-[#141416] bg-[#FCFAF6] min-h-screen selection:bg-[#CC3A63] selection:text-white">
-          <NavbarSection />
-          <Providers>
-            {children}
-            <Toaster theme="light" />
-          </Providers>
-          <Analytics />
-        </div>
+        <Providers>
+          <Frame>{children}</Frame>
+          <Toaster theme="light" />
+        </Providers>
+        <Analytics />
       </body>
     </html>
   );

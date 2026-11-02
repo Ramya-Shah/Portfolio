@@ -95,11 +95,12 @@ export const Form = () => {
       className="flex flex-col gap-4"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <h2 className="text-2xl sm:text-3xl font-black text-[#141416] tracking-tight">Send a Message</h2>
-      <p className="text-sm font-medium text-[#141416]/70">
+      <h2 className="text-[30px] font-extrabold leading-none" style={{ fontFamily: "var(--font-display)" }}>Send a Message</h2>
+      <p className="text-[15px] text-[#4A5566]">
         You can also get in touch directly through this form below.
       </p>
       <Input
+        radius="none"
         id="name"
         type="text"
         label="Name"
@@ -109,13 +110,14 @@ export const Form = () => {
         onChange={(e) => setName(e.target.value)}
         errorMessage={isInvalidName ? "Please enter your name" : ""}
         classNames={{
-          inputWrapper: `bg-white/90 border ${isInvalidName ? "border-[#CC3A63] ring-1 ring-[#CC3A63]" : "border-[#141416]/15 hover:border-[#CC3A63] focus-within:border-[#CC3A63]"} text-[#141416] shadow-xs transition-colors`,
-          label: "text-[#141416]/80 font-bold",
-          input: "text-[#141416] font-medium",
-          errorMessage: "text-[#CC3A63] text-xs font-bold mt-1",
+          inputWrapper: `rounded-none bg-[#F7F8F6] border-[1.5px] shadow-none ${isInvalidName ? "border-[#B42318]" : "border-[#1B2430] hover:border-[#C43F1A] group-data-[focus=true]:border-[#C43F1A]"} text-[#1B2430] transition-colors`,
+          label: "text-[#4A5566] font-bold",
+          input: "text-[#1B2430] font-medium placeholder:text-[#6B7585]",
+          errorMessage: "text-[#B42318] text-xs font-bold mt-1",
         }}
       />
       <Input
+        radius="none"
         type="email"
         name="email"
         id="email"
@@ -126,13 +128,14 @@ export const Form = () => {
         onChange={(e) => setEmail(e.target.value)}
         errorMessage={isInvalidEmail ? (email.trim() === "" ? "Please enter your email" : "Please enter a valid email address") : ""}
         classNames={{
-          inputWrapper: `bg-white/90 border ${isInvalidEmail ? "border-[#CC3A63] ring-1 ring-[#CC3A63]" : "border-[#141416]/15 hover:border-[#CC3A63] focus-within:border-[#CC3A63]"} text-[#141416] shadow-xs transition-colors`,
-          label: "text-[#141416]/80 font-bold",
-          input: "text-[#141416] font-medium",
-          errorMessage: "text-[#CC3A63] text-xs font-bold mt-1",
+          inputWrapper: `rounded-none bg-[#F7F8F6] border-[1.5px] shadow-none ${isInvalidEmail ? "border-[#B42318]" : "border-[#1B2430] hover:border-[#C43F1A] group-data-[focus=true]:border-[#C43F1A]"} text-[#1B2430] transition-colors`,
+          label: "text-[#4A5566] font-bold",
+          input: "text-[#1B2430] font-medium placeholder:text-[#6B7585]",
+          errorMessage: "text-[#B42318] text-xs font-bold mt-1",
         }}
       />
       <Textarea
+        radius="none"
         id="message"
         type="text"
         label="Message"
@@ -143,18 +146,18 @@ export const Form = () => {
         onChange={(e) => setMessage(e.target.value)}
         errorMessage={isInvalidMessage ? "Please enter a message" : ""}
         classNames={{
-          inputWrapper: `bg-white/90 border ${isInvalidMessage ? "border-[#CC3A63] ring-1 ring-[#CC3A63]" : "border-[#141416]/15 hover:border-[#CC3A63] focus-within:border-[#CC3A63]"} text-[#141416] shadow-xs transition-colors`,
-          label: "text-[#141416]/80 font-bold",
-          input: "text-[#141416] font-medium",
-          errorMessage: "text-[#CC3A63] text-xs font-bold mt-1",
+          inputWrapper: `rounded-none bg-[#F7F8F6] border-[1.5px] shadow-none ${isInvalidMessage ? "border-[#B42318]" : "border-[#1B2430] hover:border-[#C43F1A] group-data-[focus=true]:border-[#C43F1A]"} text-[#1B2430] transition-colors`,
+          label: "text-[#4A5566] font-bold",
+          input: "text-[#1B2430] font-medium placeholder:text-[#6B7585]",
+          errorMessage: "text-[#B42318] text-xs font-bold mt-1",
         }}
       />
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-3.5 px-6 rounded-xl bg-[#141416] text-[#FFF7EB] font-black text-sm tracking-wide shadow-lg bento-btn-poppy hover:bg-[#CC3A63] transition-colors disabled:opacity-50"
+        className="w-full min-h-[50px] px-6 border-2 border-[#1B2430] bg-[#1B2430] text-white font-bold text-[17px] hover:bg-[#C43F1A] hover:border-[#C43F1A] transition-colors disabled:opacity-50"
       >
-        {isSubmitting ? "Sending..." : "Send Message →"}
+        {isSubmitting ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

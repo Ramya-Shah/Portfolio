@@ -5,9 +5,10 @@ import { Project } from "../Project";
 export const Projects = () => {
   return (
     <main className="flex flex-col gap-20">
-      {ProjectList.map((project: ProjectType) => (
+      {ProjectList.map((project: ProjectType, i: number) => (
         <Project
           key={`project-item-${project.title}`}
+          sheet={i + 1}
           {...project}
         />
       ))}

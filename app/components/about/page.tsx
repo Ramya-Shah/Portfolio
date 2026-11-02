@@ -1,14 +1,18 @@
 "use client";
 
-import { BentoDashboard } from "../BentoDashboard";
+import Link from "next/link";
+import { BentoDashboard, ProjectSheets } from "../BentoDashboard";
 import { Experience } from "../Experience";
 import { Tooltip } from "@nextui-org/tooltip";
-import { techonologyIconList, whoAmIData } from "@/app/utils";
+import { techonologyIconList, whoAmIData, contactData } from "@/app/utils";
 import IconComponent from "../ui/IconComponent";
 import { iconType } from "@/app/types";
+import dw from "../drawing/drawing.module.css";
+import s from "./about.module.css";
 
 export default function About() {
   const { whoAmI, quote } = whoAmIData;
+  const { email, github, linkedIn } = contactData;
 
   const skillGroups = [
     {
@@ -42,95 +46,81 @@ export default function About() {
   ];
 
   return (
-    <div className="flex flex-col gap-12 w-full">
-      {/* 1. Bento Dashboard Matching Reference Design */}
+    <>
       <BentoDashboard />
 
-      {/* 2. Professional Experience & Systems Timeline */}
       <Experience />
 
-      {/* 3. Categorized Technical Stack in Cream Bento Palette */}
-      <section className="flex flex-col gap-6 py-4">
-        <div className="flex flex-col gap-2">
-          <div className="inline-flex items-center gap-2 text-[#A2AB73] font-bold text-xs uppercase tracking-widest">
-            <span>Stack &amp; Capabilities</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#141416] tracking-normal">
-            Skills &amp; Technologies
-          </h2>
-          <p className="text-[#141416]/75 text-sm sm:text-base max-w-2xl font-medium leading-relaxed">
-            Core technologies and distributed engines utilized across production workflows.
-          </p>
-        </div>
+      <ProjectSheets />
 
-        <div className="rounded-3xl bg-[#F9F0E0] text-[#141416] p-7 sm:p-9 shadow-xl border border-[#FFF7EB]/60 bento-poppy flex flex-col gap-8">
-          {/* Interactive Icon Grid */}
-          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-7 py-3 border-b border-[#141416]/10">
-            {techonologyIconList.map(({ name, icon }: iconType) => (
+      {/* Skills */}
+      <section className={dw.section}>
+        <div className={dw.strip}>
+          <h2 className={`${dw.display} ${dw.h2}`}>Skills &amp; Technologies</h2>
+          <span className={dw.sheetRef}>Stack &amp; Capabilities</span>
+        </div>
+        <p className={dw.lede}>Core technologies and distributed engines utilized across production workflows.</p>
+
+        <ul className={s.icons}>
+          {techonologyIconList.map(({ name, icon }: iconType) => (
+            <li key={`technology-item-${name}`}>
               <Tooltip
-                key={`technology-item-${name}`}
                 content={name}
                 placement="top"
-                className="bg-[#141416] text-[#FFF7EB] text-xs font-bold px-3 py-1 rounded-lg shadow-xl"
+                radius="none"
+                className="bg-[#1B2430] text-white text-xs font-semibold px-3 py-1"
               >
-                <div className="p-3.5 rounded-2xl bg-white border border-[#141416]/15 hover:border-[#CC3A63] hover:shadow-lg bento-btn-poppy cursor-pointer flex items-center justify-center shadow-xs">
+                <span tabIndex={0} aria-label={name} className={s.icon}>
                   <IconComponent icon={icon} />
-                </div>
-              </Tooltip>
-            ))}
-          </div>
-
-          {/* Categorized Matrix */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {skillGroups.map((group, gIdx) => (
-              <div
-                key={`group-${gIdx}`}
-                className="flex flex-col gap-2.5 p-5 rounded-2xl bg-[#141416]/5 border border-[#141416]/10 bento-poppy"
-              >
-                <span className="text-xs font-extrabold uppercase tracking-wider text-[#CC3A63]">
-                  {group.category}
                 </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {group.skills.map((skill, sIdx) => (
-                    <span
-                      key={`skill-${sIdx}`}
-                      className="text-xs font-bold px-2.5 py-1 rounded-lg bg-[#FFF7EB] text-[#141416] border border-[#141416]/15 shadow-xs"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+              </Tooltip>
+            </li>
+          ))}
+        </ul>
+
+        <div className={s.groups}>
+          {skillGroups.map((group, gIdx) => (
+            <div key={`group-${gIdx}`} className={s.group}>
+              <h3 className={`${dw.display} ${s.groupName}`}>{group.category}</h3>
+              <ul className={dw.chips}>
+                {group.skills.map((skill, sIdx) => (
+                  <li key={`skill-${sIdx}`}>{skill}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* 4. Engineering Philosophy & Bio */}
-      <section className="flex flex-col gap-6 py-4 mb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 rounded-3xl bg-[#F9F0E0] text-[#141416] p-7 sm:p-9 shadow-xl border border-[#FFF7EB]/60 bento-poppy flex flex-col gap-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-[#A2AB73]">
-              Engineering Mindset
-            </span>
-            <h3 className="text-2xl font-black text-[#141416] tracking-tight">
-              High Ownership, Rigorous Validation &amp; End-to-End Systems
-            </h3>
-            <p className="text-sm font-medium text-[#141416]/80 leading-relaxed mt-2">
-              {whoAmI}
-            </p>
-          </div>
-
-          <div className="rounded-3xl bg-[#A2AB73]/20 text-[#141416] p-7 sm:p-9 shadow-xl border border-[#A2AB73]/40 bento-poppy flex flex-col justify-center gap-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-[#CC3A63]">
-              Core Principle
-            </span>
-            <blockquote className="text-xl sm:text-2xl font-black text-[#141416] italic leading-snug">
-              &ldquo;{quote}&rdquo;
-            </blockquote>
-          </div>
+      {/* Engineering mindset */}
+      <section className={dw.section}>
+        <div className={dw.strip}>
+          <h2 className={`${dw.display} ${dw.h2}`}>High Ownership, Rigorous Validation &amp; End-to-End Systems</h2>
+          <span className={dw.sheetRef}>Engineering Mindset</span>
+        </div>
+        <div className={s.mindset}>
+          <p className={`${dw.body} ${s.bio}`}>{whoAmI}</p>
+          <figure className={s.principle}>
+            <figcaption className={s.principleTitle}>Core Principle</figcaption>
+            <blockquote className={`${dw.display} ${s.quote}`}>&ldquo;{quote}&rdquo;</blockquote>
+          </figure>
         </div>
       </section>
-    </div>
+
+      {/* Contact */}
+      <section className={`${dw.section} ${s.contact}`}>
+        <div>
+          <p className={s.ask}>Have a question?</p>
+          <Link href="/contact" className={`${dw.display} ${s.contactLink}`}>
+            Contact Me
+          </Link>
+        </div>
+        <div className={dw.actions}>
+          <a href={`mailto:${email}?subject=Opportunity Inquiry`} className={dw.textLink}>Email</a>
+          <a href={github} target="_blank" rel="noopener noreferrer" className={dw.textLink}>GitHub</a>
+          <a href={linkedIn} target="_blank" rel="noopener noreferrer" className={dw.textLink}>LinkedIn</a>
+        </div>
+      </section>
+    </>
   );
 }

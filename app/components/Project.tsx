@@ -3,123 +3,62 @@
 import Image from "next/image";
 import { TechnologyType, ProjectType } from "../types";
 import { GithubSVG, LinkSVG } from "./ui/icons";
+import dw from "./drawing/drawing.module.css";
+import s from "./project.module.css";
 
-export const Project = (project: ProjectType) => {
-  const {
-    description,
-    title,
-    subtitle,
-    icon,
-    imgUrl,
-    videoUrl,
-    technologies,
-    githubUrl,
-    websiteUrl,
-    metricBadge,
-  } = project;
+export const projectSlug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+export const Project = ({ sheet, highlighted, ...project }: ProjectType & { sheet: number; highlighted?: boolean }) => {
+  const { description, title, subtitle, imgUrl, videoUrl, technologies, githubUrl, websiteUrl, metricBadge } = project;
 
   const hasLiveUrl = websiteUrl && websiteUrl !== "" && websiteUrl !== "NONE";
 
   return (
-    <div className="rounded-3xl bg-[#F9F0E0] text-[#141416] overflow-hidden shadow-xl border border-[#FFF7EB]/60 bento-poppy flex flex-col justify-between group">
-      <div>
-        {/* Visual Media Header (16:9 Aspect Ratio) */}
-        <div className="relative w-full aspect-video bg-black/10 overflow-hidden border-b border-[#141416]/10">
-          {videoUrl ? (
-            <video
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              autoPlay
-              loop
-              muted
-              playsInline
-              src={videoUrl}
-            />
-          ) : (
-            <Image
-              src={imgUrl}
-              alt={title}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              priority={false}
-            />
-          )}
-
-          {/* Metric Pill Overlay */}
-          {metricBadge && (
-            <div className="absolute top-3 right-3 z-10">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-black bg-[#CC3A63] text-white shadow-lg tracking-wider">
-                {metricBadge}
-              </span>
-            </div>
-          )}
-        </div>
-
-        {/* Card Body */}
-        <div className="p-6 sm:p-7 flex flex-col gap-4">
-          {/* Title & Subtitle */}
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-[#141416]/5 border border-[#141416]/10 flex items-center justify-center text-[#141416] flex-shrink-0">
-              {icon}
-            </div>
-            <div className="flex flex-col">
-              <h3 className="text-xl font-black text-[#141416] tracking-tight group-hover:text-[#CC3A63] transition-colors">
-                {title}
-              </h3>
-              <span className="text-xs font-bold text-[#A2AB73] uppercase tracking-wider">
-                {subtitle}
-              </span>
-            </div>
-          </div>
-
-          {/* Architecture & Engineering Description */}
-          <p className="text-xs sm:text-sm font-medium text-[#141416]/75 leading-relaxed line-clamp-4">
-            {description}
-          </p>
-
-          {/* Technology Badges */}
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            {technologies.map(({ name }: TechnologyType, idx: number) => (
-              <span
-                key={`tech-${idx}`}
-                className="px-2.5 py-1 rounded-lg bg-[#141416]/10 text-[#141416] text-xs font-bold"
-              >
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
+    <article id={projectSlug(title)} className={`${dw.projectSheet} ${s.card} ${highlighted ? s.highlighted : ""}`}>
+      <div className={dw.shot}>
+        {videoUrl ? (
+          <video className={s.video} autoPlay loop muted playsInline src={videoUrl} />
+        ) : (
+          <Image src={imgUrl} alt={`${title} screenshot`} fill sizes="(max-width: 900px) 92vw, 600px" className={dw.shotImg} />
+        )}
       </div>
 
-      {/* Action Footer */}
-      <div className="p-6 sm:p-7 pt-0 flex items-center gap-3">
+      <div className={dw.caption}>
+        <span className={`${dw.display} ${dw.sheetNo}`}>Sheet {String(sheet).padStart(2, "0")}</span>
+        <h2 className={`${dw.display} ${dw.sheetTitle}`}>{title}</h2>
+        <span className={dw.sheetSub}>{subtitle}</span>
+      </div>
+
+      {metricBadge && (
+        <p className={s.metric}>
+          <span className={s.metricLabel}>Spec</span>
+          <span className={`${dw.display} ${s.metricValue}`}>{metricBadge}</span>
+        </p>
+      )}
+
+      <p className={s.description}>{description}</p>
+
+      <ul className={`${dw.chips} ${s.chips}`}>
+        {technologies.map(({ name }: TechnologyType, idx: number) => (
+          <li key={`tech-${idx}`}>{name}</li>
+        ))}
+      </ul>
+
+      <div className={`${dw.actions} ${s.actions}`}>
         {hasLiveUrl ? (
-          <a
-            href={websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 py-2.5 px-4 rounded-xl bg-[#141416] text-[#FFF7EB] font-black text-xs sm:text-sm text-center bento-btn-poppy hover:bg-[#CC3A63] transition-colors flex items-center justify-center gap-2 shadow-md"
-          >
-            <LinkSVG size={15} color="#FFF7EB" />
+          <a href={websiteUrl} target="_blank" rel="noopener noreferrer" className={`${dw.primary} ${dw.small}`}>
+            <LinkSVG size={15} color="currentColor" />
             <span>Live Demo</span>
           </a>
         ) : (
-          <span className="flex-1 py-2.5 px-4 rounded-xl bg-[#141416]/5 text-[#141416]/40 text-center text-xs font-bold cursor-not-allowed border border-[#141416]/10 flex items-center justify-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#141416]/25"></span>
-            <span>Production System</span>
-          </span>
+          <span className={dw.static}>Production System</span>
         )}
-
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="py-2.5 px-4 rounded-xl border border-[#141416]/20 text-[#141416] font-bold text-xs sm:text-sm bento-btn-poppy hover:border-[#CC3A63] hover:text-[#CC3A63] flex items-center gap-2 bg-[#141416]/5"
-        >
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={`${dw.secondary} ${dw.small}`}>
           <GithubSVG size={16} color="currentColor" />
           <span>Source</span>
         </a>
       </div>
-    </div>
+    </article>
   );
 };

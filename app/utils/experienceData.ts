@@ -18,9 +18,8 @@ export type ExperienceItem = {
 
 export const experienceData: ExperienceItem[] = [
   {
-    role: "Business Analyst",
+    role: "Finance & Automation",
     company: "Meesho",
-    department: "Finance & Product Analytics",
     location: "Bangalore, India",
     period: "Jan 2026 – Present",
     description:
