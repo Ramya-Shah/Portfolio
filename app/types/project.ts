@@ -14,6 +14,7 @@ export type ProjectType = {
   technologies: TechnologyType[];
   description: string;
   imgUrl: string;
+  imgFit?: "cover" | "contain";
   videoUrl: string;
   githubUrl: string;
   websiteUrl: string;

@@ -10,7 +10,7 @@ export const projectSlug = (title: string) =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export const Project = ({ sheet, highlighted, ...project }: ProjectType & { sheet: number; highlighted?: boolean }) => {
-  const { description, title, subtitle, imgUrl, videoUrl, technologies, githubUrl, websiteUrl, metricBadge } = project;
+  const { description, title, subtitle, imgUrl, imgFit, videoUrl, technologies, githubUrl, websiteUrl, metricBadge } = project;
 
   const hasLiveUrl = websiteUrl && websiteUrl !== "" && websiteUrl !== "NONE";
 
@@ -20,7 +20,7 @@ export const Project = ({ sheet, highlighted, ...project }: ProjectType & { shee
         {videoUrl ? (
           <video className={s.video} autoPlay loop muted playsInline src={videoUrl} />
         ) : (
-          <Image src={imgUrl} alt={`${title} screenshot`} fill sizes="(max-width: 900px) 92vw, 600px" className={dw.shotImg} />
+          <Image src={imgUrl} alt={`${title} screenshot`} fill quality={90} sizes="(max-width: 900px) 92vw, (max-width: 1500px) 48vw, 33vw" className={`${dw.shotImg} ${imgFit === "contain" ? dw.shotContain : ""}`} />
         )}
       </div>
 

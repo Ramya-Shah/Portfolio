@@ -190,6 +190,7 @@ export const ProjectList: ProjectType[] = [
         description:
             "A no-code Make.com workflow that turns one new PlacidWay article into one Facebook post every day. It reads the article sitemap, skips anything already posted using a data store, and has Gemini write the post. Two guardrail layers must both pass before it publishes: a second Gemini call that checks the post against its source for medical claims, promises and invented numbers, plus fixed keyword and length rules. It can auto-publish or email the draft for human approval, logs every run, and sends Gmail alerts with retries. Posts only to a test Page, at $0 a month.",
         imgUrl: "/placidway-flow.png",
+        imgFit: "contain",
         videoUrl: "",
         githubUrl: "https://drive.google.com/file/d/1YvVD9WwN476ABub3IU4-fB9GWFVmCrQE/view",
         websiteUrl: "https://us2.make.com/public/shared-scenario/hpSAMDGzmzQ/placid-way-facebook-daily-post",

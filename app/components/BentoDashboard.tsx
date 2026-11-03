@@ -52,7 +52,7 @@ export const BentoDashboard = () => {
         <div className={s.heroSide}>
           <Link href={`/projects#${projectSlug(lead.title)}`} className={dw.projectSheet}>
             <span className={dw.shot}>
-              <Image src={lead.imgUrl} alt={`${lead.title} screenshot`} fill priority sizes="(max-width: 900px) 92vw, 560px" className={dw.shotImg} />
+              <Image src={lead.imgUrl} alt={`${lead.title} screenshot`} fill priority quality={90} sizes="(max-width: 900px) 92vw, 48vw" className={`${dw.shotImg} ${lead.imgFit === "contain" ? dw.shotContain : ""}`} />
             </span>
             <span className={dw.caption}>
               <span className={`${dw.display} ${dw.sheetNo}`}>{sheetNo(0)}</span>
@@ -116,7 +116,7 @@ export const ProjectSheets = () => {
           return (
             <Link key={p.title} href={`/projects#${projectSlug(p.title)}`} className={dw.projectSheet}>
               <span className={dw.shot}>
-                <Image src={p.imgUrl} alt={`${p.title} screenshot`} fill sizes="(max-width: 900px) 92vw, 600px" className={dw.shotImg} />
+                <Image src={p.imgUrl} alt={`${p.title} screenshot`} fill quality={90} sizes="(max-width: 900px) 92vw, 48vw" className={`${dw.shotImg} ${p.imgFit === "contain" ? dw.shotContain : ""}`} />
               </span>
               <span className={dw.caption}>
                 <span className={`${dw.display} ${dw.sheetNo}`}>{sheetNo(i + 1)}</span>

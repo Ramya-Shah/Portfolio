@@ -289,6 +289,13 @@ a.projectSheet:hover,
   object-position: top;
 }
 
+/* Very wide or tall screenshots are shown whole instead of cropped. */
+.shot .shotContain {
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+
 .caption {
   display: grid;
   grid-template-columns: auto 1fr;
