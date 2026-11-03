@@ -60,6 +60,41 @@ export const ProjectList: ProjectType[] = [
     },
     {
         icon: <ShadcnLandingSVG />,
+        title: "Unspoof",
+        subtitle: "Free Email Spoofing Checker in Plain English",
+        category: "fullstack",
+        metricBadge: "Email security audit",
+        technologies: [
+            {
+                name: "Node.js",
+                icon: <NodeJSSVG color="#68A063" size={16} />,
+            },
+            {
+                name: "JavaScript",
+                icon: <JavascriptSVG color="#F7DF1E" size={16} />,
+            },
+            {
+                name: "Upstash Redis",
+                icon: <RedisSVG color="#DC382D" size={16} />,
+            },
+            {
+                name: "DNS-over-HTTPS",
+                icon: <ShadcnSVG color="#1B2430" size={16} />,
+            },
+            {
+                name: "Vercel",
+                icon: <ShadcnSVG color="#000000" size={16} />,
+            },
+        ],
+        description:
+            "Type a domain and learn in plain English whether someone could send email pretending to be you: a score out of 100, one verdict and the one thing to fix first, built from public DMARC, SPF, DKIM and MX records. Uses DNS-over-HTTPS with provider fallback after plain DNS gave false 'record missing' results, counts SPF lookups recursively per RFC 7208, and never shows a score when DNS can't be reached. Per-IP and global rate limits, a 5-minute cache and SPF query caps on Upstash Redis, plus a private usage dashboard that never stores raw IPs. Plain Node.js on Vercel, $0 to run.",
+        imgUrl: "/unspoof.png",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/unspoof",
+        websiteUrl: "https://unspoof.vercel.app",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
         title: "Snap-to-Pay",
         subtitle: "AI Bill Reader with Razorpay Payments",
         category: "ai",
