@@ -15,6 +15,7 @@ import {
     ShadcnLandingSVG,
     ShadcnSVG,
     PythonSVG,
+    KubernetesSVG,
 } from "../components/ui/icons";
 import { ProjectType } from "../types";
 
@@ -254,8 +255,8 @@ export const ProjectList: ProjectType[] = [
                 icon: <RedisSVG color="#D82C20" size={16} />,
             },
             {
-                name: "React",
-                icon: <ReactSVG color="#61DAFB" size={16} />,
+                name: "Kubernetes",
+                icon: <KubernetesSVG color="#326CE5" size={16} />,
             },
             {
                 name: "Docker",
@@ -263,11 +264,11 @@ export const ProjectList: ProjectType[] = [
             },
         ],
         description:
-            "Distributed task-processing system and real-time observability engine. Sustains 986 tasks/sec throughput under k6 load testing on AWS EC2 (300 concurrent VUs, 100% success rate, 138ms median latency) featuring Redis BLPOP worker pools, exponential-backoff retries, Dead Letter Queue (DLQ), and Socket.IO real-time telemetry.",
-        imgUrl: "/taskforge.png",
+            "Distributed task queue built from scratch, now running on Kubernetes (GKE Autopilot) over HTTPS. Producers enqueue jobs over REST; Redis workers use the reliable-queue pattern (BLMOVE into a per-worker processing list) with heartbeats, so a crashed worker's job is put back on the queue. In chaos tests that killed worker pods mid-job, 120/120 jobs on GKE and 150/150 on a local kind cluster finished exactly once, none lost. Exponential-backoff retries, a Dead Letter Queue with replay, Postgres claim checks for idempotency and a Socket.IO admin panel. The earlier AWS EC2 deployment sustained 986 tasks/sec under k6 load (300 VUs, 100% success, 138ms median latency).",
+        imgUrl: "/taskforge-live.png",
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah/TaskForge",
-        websiteUrl: "http://34.27.155.77/",
+        websiteUrl: "https://taskforge.136.80.52.40.sslip.io",
     },
     {
         icon: <ShadcnLandingSVG />,
