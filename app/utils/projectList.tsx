@@ -272,6 +272,37 @@ export const ProjectList: ProjectType[] = [
     },
     {
         icon: <ShadcnLandingSVG />,
+        title: "Uptime Monitor",
+        subtitle: "Go Uptime Monitor with a Post-Deploy Release Check",
+        category: "systems",
+        metricBadge: "18 sites monitored",
+        technologies: [
+            {
+                name: "Go",
+                icon: <ShadcnSVG color="#00ADD8" size={16} />,
+            },
+            {
+                name: "PostgreSQL",
+                icon: <PostgreSQLSVG color="#336791" size={20} />,
+            },
+            {
+                name: "Docker",
+                icon: <DockerSVG color="#2496ED" size={16} />,
+            },
+            {
+                name: "GCP",
+                icon: <ShadcnSVG color="#4285F4" size={16} />,
+            },
+        ],
+        description:
+            "A small, production-style uptime monitor in Go, standard library first, watching 18 live sites. Each site gets its own goroutine and ticker; results go to Postgres, where uptime and p50/p95 latency are computed in SQL, behind a REST API and a server-rendered status page. A verify subcommand polls a URL after a deploy and exits non-zero on a failed check or a p95 over the limit, so a pipeline can decide whether a release is healthy. Graceful shutdown lets in-flight checks finish. Traced false timeouts to pooled HTTP/2 connections going dead between checks: keep-alive gave 3/8 false failures, fresh connections 0/8. Runs in a 22.9 MB Docker image on a GCP e2-micro.",
+        imgUrl: "/uptime-status.png",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/uptime-monitor",
+        websiteUrl: "http://35.185.46.96",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
         title: "Roamly",
         subtitle: "AI-Powered Travel Experience Planner",
         category: "mobile",
@@ -334,6 +365,42 @@ export const ProjectList: ProjectType[] = [
         imgUrl: "/alphaforge.png",
         videoUrl: "",
         githubUrl: "https://github.com/Ramya-Shah/AlphaForge",
+        websiteUrl: "",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
+        title: "Financial News Sentiment Classification",
+        subtitle: "From TF-IDF Baseline to Fine-Tuned DistilBERT",
+        category: "ai",
+        metricBadge: "0.892 macro F1",
+        technologies: [
+            {
+                name: "Python",
+                icon: <PythonSVG color="#3776AB" size={16} />,
+            },
+            {
+                name: "PyTorch",
+                icon: <ShadcnSVG color="#EE4C2C" size={16} />,
+            },
+            {
+                name: "scikit-learn",
+                icon: <ShadcnSVG color="#F7931E" size={16} />,
+            },
+            {
+                name: "NumPy",
+                icon: <ShadcnSVG color="#4DABCF" size={16} />,
+            },
+            {
+                name: "FastAPI",
+                icon: <ShadcnSVG color="#009688" size={16} />,
+            },
+        ],
+        description:
+            "Classifies financial news sentences as negative, neutral or positive, benchmarking three models on 4,211 sentences: TF-IDF + logistic regression, a two-layer neural network written from scratch in NumPy (hand-derived backpropagation, gradient-checked to a relative error of 10^-9) and a fine-tuned DistilBERT trained with a custom PyTorch loop. Held-out test macro F1 rose from 0.735 to 0.892. Leakage-safe pipeline with deduplication, stratified 70/15/15 splits, a single end-of-project test evaluation and bootstrap confidence intervals. The best model is served through a FastAPI inference service with single and batch prediction.",
+        imgUrl: "/financial-sentiment.png",
+        imgFit: "contain",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/financial_classifier",
         websiteUrl: "",
     },
     {
