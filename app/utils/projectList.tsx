@@ -471,6 +471,42 @@ export const ProjectList: ProjectType[] = [
     },
     {
         icon: <ShadcnLandingSVG />,
+        title: "Wardrobe",
+        subtitle: "AI-Built Local-First Wardrobe App for Web and Android",
+        category: "fullstack",
+        metricBadge: "AI-built with Claude",
+        technologies: [
+            {
+                name: "Next.js",
+                icon: <NextSVG color="#000000" size={16} />,
+            },
+            {
+                name: "TypeScript",
+                icon: <TypescriptSVG color="#3178C6" size={16} />,
+            },
+            {
+                name: "Prisma",
+                icon: <ShadcnSVG color="#2D3748" size={16} />,
+            },
+            {
+                name: "SQLite",
+                icon: <ShadcnSVG color="#003B57" size={16} />,
+            },
+            {
+                name: "Expo",
+                icon: <ShadcnSVG color="#000000" size={16} />,
+            },
+        ],
+        description:
+            "AI-built personal wardrobe app: a Next.js web app that runs on your own computer plus an offline Android app in Expo, sharing validation, search and backup-format code. Stores clothing photos with rich metadata, with weighted search, 10 facet filters and a ranked outfit picker. The app itself calls no AI API: Claude reads the photos in your own chat and returns JSON in a versioned schema, which the app parses leniently, matches to photos by filename and imports all-or-nothing, tracking which fields were inferred so re-imports never overwrite your edits. Full zip backup and restore moves data between web and phone.",
+        imgUrl: "/wardrobe.png",
+        imgFit: "contain",
+        videoUrl: "",
+        githubUrl: "https://github.com/Ramya-Shah/wardrobe-picker",
+        websiteUrl: "",
+    },
+    {
+        icon: <ShadcnLandingSVG />,
         title: "MusicBridge",
         subtitle: "Spotify to YouTube Music Playlist Transfer",
         category: "fullstack",
