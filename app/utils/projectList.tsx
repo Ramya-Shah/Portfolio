@@ -466,7 +466,7 @@ export const ProjectList: ProjectType[] = [
             "100% local, offline-first personal finance application with SQLite persistence. Features monthly budget balancing, category-level spending insights, custom transaction filters, donut chart visualizations, and native Android quick-add home-screen widget integration via deep linking.",
         imgUrl: "/expensetracker.png",
         videoUrl: "",
-        githubUrl: "https://github.com/Ramya-Shah",
+        githubUrl: "https://github.com/Ramya-Shah/expense-app-mobile",
         websiteUrl: "",
     },
     {
